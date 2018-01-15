@@ -57,6 +57,32 @@ tests:
 check: domake
 	shellcheck $^
 
+ifneq (,$(BUMP_VERSION))
+.SILENT: bump
+bump:
+	old="$$(bash domake --version)"; \
+	sed -e "/^VERSION=/s,$$old,$(BUMP_VERSION)," -i domake; \
+	sed -e "/^:man source:/s,$$old,$(BUMP_VERSION)," -i domake.1.adoc; \
+	sed -e "/^pkgver=/s,$$old,$(BUMP_VERSION)," -e "/^pkgrel=/s,=.*,=1," -i PKGBUILD
+	git commit domake domake.1.adoc PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
+	git tag --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
+else
+.SILENT: bump-major
+bump-major:
+	old="$$(bash domake --version)"; \
+	new="$$(($${old%.*}+1)).0"; \
+	make bump "BUMP_VERSION=$$new"
+
+.SILENT: bump-minor
+bump-minor:
+	old="$$(bash domake --version)"; \
+	new="$${old%.*}.$$(($${old##*.}+1))"; \
+	make bump "BUMP_VERSION=$$new"
+
+.SILENT: bump
+bump: bump-minor
+endif
+
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
