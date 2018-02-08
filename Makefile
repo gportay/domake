@@ -60,6 +60,7 @@ check: domake
 ifneq (,$(BUMP_VERSION))
 .SILENT: bump
 bump:
+	! git tag | grep "$(BUMP_VERSION)"
 	old="$$(bash domake --version)"; \
 	sed -e "/^VERSION=/s,$$old,$(BUMP_VERSION)," -i domake; \
 	sed -e "/^:man source:/s,$$old,$(BUMP_VERSION)," -i domake.1.adoc; \
