@@ -87,8 +87,8 @@ endif
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
-	rm -f PKGBUILD.aur master.tar.gz src/master.tar.gz *.pkg.tar.xz \
-	   -R src/domake-master/ pkg/domake/
+	rm -f PKGBUILD.aur PKGBUILD.devel *.tar.gz src/*.tar.gz *.pkg.tar.xz \
+	   -R src/domake-*/ pkg/domake/
 
 .PHONY: aur
 aur: PKGBUILD.aur
@@ -102,6 +102,18 @@ PKGBUILD.aur: PKGBUILD
 	    -e "/source=/a$$md5sum" \
 	    -i $@.tmp
 	mv $@.tmp $@
+
+.PHONY: devel
+devel: PKGBUILD.devel
+	makepkg --force --syncdeps -p $^
+
+PKGBUILD.devel: PKGBUILD
+	sed -e "/source=/d" \
+	    -e "/md5sums=/d" \
+	    -e "/build() {/,/^}$$/s,\$$srcdir/\$$pkgname-\$$pkgver,\$$startdir,g" \
+	    -e "/package() {/,/^}$$/s,\$$srcdir/\$$pkgname-\$$pkgver,\$$startdir,g" \
+	    -e "/pkgver=/apkgver() { printf \"\$$(bash domake --version)r%s.%s\" \"\$$(git rev-list --count HEAD)\" \"\$$(git rev-parse --short HEAD)\"; }" \
+	       $< >$@
 
 %.1: %.1.adoc
 	asciidoctor -b manpage -o $@ $<
