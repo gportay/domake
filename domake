@@ -27,6 +27,8 @@ Options:
       -h or --help              Print usage.
 
 Environment variables:
+      DOCKER                    The docker executable.
+
       DOSHELL                   The full pathname to the shell to run in docker
                                 image.
                                 Equivalent to --shell SHELL.
@@ -37,6 +39,7 @@ EOF
 makeopts=()
 doshopts=("--verbose")
 shell_doshopts=()
+DOCKER="${DOCKER:-docker}"
 while [ "$#" -ne 0 ]; do
 	if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 		usage
@@ -50,6 +53,8 @@ while [ "$#" -ne 0 ]; do
 		shift
 	elif [[ "$1" =~ ^DOSHELL=.* ]]; then
 		eval "$1"
+	elif [[ "$1" =~ ^DOCKER=.* ]]; then
+		eval export "$1"
 	elif [ "$1" = "-F" ] || [ "$1" = "--dockerfile" ]; then
 		doshopts+=("--dockerfile" "$2")
 		shift
@@ -66,7 +71,7 @@ done
 # Create a container and remove it on exit
 # shellcheck disable=SC2086
 container="$(dosh "${doshopts[@]}" --detach)"
-trap 'docker rm -f $container' 0
+trap '$DOCKER rm -f $container' 0
 
 # Run make and set docker shell as default shell
 set -- "${makeopts[@]}"

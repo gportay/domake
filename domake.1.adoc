@@ -40,6 +40,9 @@ For a more thorough description of *make(1)*, please refers to its manual.
 
 == ENVIRONMENT VARIABLES
 
+**DOCKER**
+	The docker executable.
+
 **DOSHELL**
 	The full pathname to the shell to run in docker image.
 	Equivalent to --shell SHELL.
