@@ -38,6 +38,12 @@ For a more thorough description of *make(1)*, please refers to its manual.
 **-h or --help**
 	Print usage.
 
+== ENVIRONMENT VARIABLES
+
+**DOSHELL**
+	The full pathname to the shell to run in docker image.
+	Equivalent to --shell SHELL.
+
 == EXAMPLES
 
 Run every shell _command_ in container

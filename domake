@@ -25,6 +25,11 @@ Options:
                                 Equivalent to set DOSHELL=/bin/sh.
       -V or --version           Print version.
       -h or --help              Print usage.
+
+Environment variables:
+      DOSHELL                   The full pathname to the shell to run in docker
+                                image.
+                                Equivalent to --shell SHELL.
 EOF
 }
 
