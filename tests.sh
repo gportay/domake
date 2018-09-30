@@ -102,9 +102,9 @@ else
 fi
 echo
 
-run "domake: Test option --sh with a busybox based distro (/bin/ash)"
+run "domake: Test option --shell SHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --sh | tee /dev/stderr | \
+     DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
      grep -q 'SHELL=/bin/sh' )
 then
 	ok
@@ -124,9 +124,9 @@ else
 fi
 echo
 
-run "domake: Test overriding nonexistent \$DOSHELL and option --sh with a busybox based distro (/bin/ash)"
+run "domake: Test overriding nonexistent \$DOSHELL and option --shell SHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --sh | tee /dev/stderr | \
+     DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
      grep -q 'SHELL=/bin/sh' )
 then
 	ok
