@@ -56,9 +56,9 @@ result() {
 PATH="$PWD:$PATH"
 trap result 0
 
-run "dmake: Test default target with (Makefile from stdin)"
+run "domake: Test default target with (Makefile from stdin)"
 if echo -e "all:\n\t@cat /etc/os*release" | \
-   dmake "$@" -f - | tee /dev/stderr | \
+   domake "$@" -f - | tee /dev/stderr | \
    grep -q 'PRETTY_NAME="Ubuntu 16.04[.0-9]* LTS"'
 then
 	ok
@@ -67,9 +67,9 @@ else
 fi
 echo
 
-run "dmake: Test option -F with relative path (Makefile from stdin)"
+run "domake: Test option -F with relative path (Makefile from stdin)"
 if ( echo -e "all:\n\t@cat /etc/os*release" | \
-     dmake "$@" -f - -F Dockerfile.fedora | tee /dev/stderr | \
+     domake "$@" -f - -F Dockerfile.fedora | tee /dev/stderr | \
      grep -q 'PRETTY_NAME="Fedora 25 (Twenty Five)' )
 then
 	ok
@@ -78,10 +78,10 @@ else
 fi
 echo
 
-run "dmake: Test option -C with relative path (Makefile from stdin)"
+run "domake: Test option -C with relative path (Makefile from stdin)"
 if ( cd .. && dir="${OLDPWD##*/}" && \
      echo -e "all:\n\t@cat /etc/os*release" | \
-     dmake "$@" -f - -C "$dir" | tee /dev/stderr | \
+     domake "$@" -f - -C "$dir" | tee /dev/stderr | \
      grep -q 'PRETTY_NAME="Ubuntu 16.04[.0-9]* LTS"' )
 then
 	ok
@@ -90,10 +90,10 @@ else
 fi
 echo
 
-run "dmake: Test option -C with absolute path (Makefile from stdin)"
+run "domake: Test option -C with absolute path (Makefile from stdin)"
 if ( cd /tmp && dir="$OLDPWD" && \
      echo -e "all:\n\t@cat /etc/os*release" | \
-     dmake "$@" -f - -C "$dir" | tee /dev/stderr | \
+     domake "$@" -f - -C "$dir" | tee /dev/stderr | \
      grep -q 'PRETTY_NAME="Ubuntu 16.04[.0-9]* LTS"' )
 then
 	ok
@@ -102,9 +102,9 @@ else
 fi
 echo
 
-run "dmake: Test option --sh with a busybox based distro (/bin/ash)"
+run "domake: Test option --sh with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/zsh dmake "$@" -f - -F Dockerfile.alpine --sh | tee /dev/stderr | \
+     DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --sh | tee /dev/stderr | \
      grep -q 'SHELL=/bin/sh' )
 then
 	ok
@@ -113,9 +113,9 @@ else
 fi
 echo
 
-run "dmake: Test overriding existent \$DOSHELL with a busybox based distro (/bin/ash)"
+run "domake: Test overriding existent \$DOSHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/ash dmake "$@" -f - -F Dockerfile.alpine | tee /dev/stderr | \
+     DOSHELL=/bin/ash domake "$@" -f - -F Dockerfile.alpine | tee /dev/stderr | \
      grep -q 'SHELL=/bin/ash' )
 then
 	ok
@@ -124,9 +124,9 @@ else
 fi
 echo
 
-run "dmake: Test overriding nonexistent \$DOSHELL and option --sh with a busybox based distro (/bin/ash)"
+run "domake: Test overriding nonexistent \$DOSHELL and option --sh with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/zsh dmake "$@" -f - -F Dockerfile.alpine --sh | tee /dev/stderr | \
+     DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --sh | tee /dev/stderr | \
      grep -q 'SHELL=/bin/sh' )
 then
 	ok
@@ -135,9 +135,9 @@ else
 fi
 echo
 
-run "dmake: Test overriding existent \$DOSHELL in command line argument with a busybox based distro (/bin/ash)"
+run "domake: Test overriding existent \$DOSHELL in command line argument with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     dmake "$@" -f - -F Dockerfile.alpine DOSHELL=/bin/sh | tee /dev/stderr | \
+     domake "$@" -f - -F Dockerfile.alpine DOSHELL=/bin/sh | tee /dev/stderr | \
      grep -q 'SHELL=/bin/sh' )
 then
 	ok
@@ -146,39 +146,3 @@ else
 fi
 echo
 
-run "docker-clean: Test without option with an exited container"
-if cid="$(docker run --detach ubuntu:latest)" && sleep 3 && \
-   docker-clean | tee /dev/stderr | \
-   grep -q "${cid:0:12}"
-then
-	ok
-else
-	ko
-fi
-echo
-
-run "docker-clean: Test without option with a dangled image"
-if cid="$(cat <<EOF | docker build --quiet -
-FROM ubuntu:latest
-RUN uname
-EOF
-)" && sleep 3 && \
-   docker-clean | tee /dev/stderr | \
-   grep -q "Deleted: $cid"
-then
-	ok
-else
-	ko
-fi
-echo
-
-run "docker-clean: Test with option -c with a created image"
-if cid="$(docker create ubuntu:latest)" && sleep 3 && \
-   docker-clean -c | tee /dev/stderr | \
-   grep -q "${cid:0:12}"
-then
-	ok
-else
-	ko
-fi
-echo

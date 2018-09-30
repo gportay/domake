@@ -5,7 +5,7 @@
 # the terms of the MIT License.
 #
 
-_dmake()
+_domake()
 {
 	local cur prev words cword
 	_init_completion -s || return
@@ -25,4 +25,4 @@ _dmake()
 	local long_opts="--dockerfile --directory --sh --help"
 	COMPREPLY=( $( compgen -W "$short_opts $long_opts" -- "$cur" ) )
 } &&
-complete -F _dmake dmake
+complete -F _domake domake
