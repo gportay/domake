@@ -8,6 +8,8 @@
 
 set -e
 
+VERSION="1.0"
+
 usage() {
 	cat <<EOF
 Usage: ${0##*/} [OPTIONS] [TARGET...]
@@ -20,6 +22,7 @@ Options:
       -F or --dockerfile FILE   Path to the Dockerfile to use.
       -C or --directory DIR     Change to directory before doing anything else.
             --sh                Set /bin/sh as default shell.
+      -V or --version           Print version.
       -h or --help              Print usage.
 EOF
 }
@@ -31,6 +34,9 @@ parse_arguments() {
 		if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 			usage
 			exit 0
+		elif [ "$1" = "-V" ] || [ "$1" = "--version" ]; then
+			echo "$VERSION"
+			exit
 		elif [ "$1" = "--sh" ]; then
 			doshopts+=" --shell /bin/sh"
 			shell_doshopts+=" --shell /bin/sh"

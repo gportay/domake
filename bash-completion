@@ -21,8 +21,8 @@ _domake()
 		;;
 	esac
 
-	local short_opts="-F -C -h"
-	local long_opts="--dockerfile --directory --sh --help"
+	local short_opts="-F -C -V -h"
+	local long_opts="--dockerfile --directory --sh --version --help"
 	COMPREPLY=( $( compgen -W "$short_opts $long_opts" -- "$cur" ) )
 } &&
 complete -F _domake domake
