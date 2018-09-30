@@ -137,8 +137,8 @@ echo
 
 run "domake: Test overriding existent \$DOSHELL in command line argument with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     domake "$@" -f - -F Dockerfile.alpine DOSHELL=/bin/sh | tee /dev/stderr | \
-     grep -q 'SHELL=/bin/sh' )
+     domake "$@" -f - -F Dockerfile.alpine DOSHELL=/bin/ash | tee /dev/stderr | \
+     grep -q 'SHELL=/bin/ash' )
 then
 	ok
 else
