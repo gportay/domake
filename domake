@@ -22,6 +22,10 @@ Options:
       -F or --dockerfile FILE   Path to the Dockerfile to use.
       -C or --directory DIR     Change to directory before doing anything else.
             --sh                Set /bin/sh as default shell.
+                                Equivalent to set DOSHELL=/bin/sh.
+                                           or set --shell /bin/sh.
+                                This option is deprecated; use --shell instead.
+            --shell SHELL       Set shell interpretor.
       -V or --version           Print version.
       -h or --help              Print usage.
 EOF
@@ -41,6 +45,10 @@ while [ "$#" -ne 0 ]; do
 	elif [ "$1" = "--sh" ]; then
 		doshopts+=("--shell" "/bin/sh")
 		shell_doshopts+=("--shell" "/bin/sh")
+	elif [ "$1" = "--shell" ]; then
+		doshopts+=("--shell" "$2")
+		shell_doshopts+=("--shell" "$2")
+		shift
 	elif [[ "$1" =~ ^DOSHELL=.* ]]; then
 		eval "$1"
 	elif [ "$1" = "-F" ] || [ "$1" = "--dockerfile" ]; then
