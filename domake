@@ -70,4 +70,4 @@ trap 'docker rm -f $container' 0
 
 # Run make and set docker shell as default shell
 set -- "${makeopts[@]}"
-exec make SHELL="dosh ${shell_doshopts[*]} --exec $container" "$@"
+make SHELL="dosh ${shell_doshopts[*]} --exec $container" "$@"
