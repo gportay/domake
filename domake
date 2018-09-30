@@ -29,7 +29,8 @@ EOF
 
 parse_arguments() {
 	makeopts=()
-	doshopts="--verbose"
+	doshopts=("--verbose")
+	shell_doshopts=()
 	while [ "$#" -ne 0 ]; do
 		if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 			usage
@@ -38,15 +39,15 @@ parse_arguments() {
 			echo "$VERSION"
 			exit
 		elif [ "$1" = "--sh" ]; then
-			doshopts+=" --shell /bin/sh"
-			shell_doshopts+=" --shell /bin/sh"
+			doshopts+=("--shell" "/bin/sh")
+			shell_doshopts+=("--shell" "/bin/sh")
 		elif [ "$1" = "DOSHELL=/bin/sh" ]; then
 			eval "$1"
 		elif [ "$1" = "-F" ] || [ "$1" = "--dockerfile" ]; then
-			doshopts+=" --dockerfile $2"
+			doshopts+=("--dockerfile" "$2")
 			shift
 		elif [ "$1" = "-C" ] || [ "$1" = "--directory" ]; then
-			doshopts+=" --directory $2"
+			doshopts+=("--directory" "$2")
 			makeopts[${#makeopts[*]}]="$1"
 			makeopts[${#makeopts[*]}]="$2"
 			shift
@@ -62,9 +63,9 @@ parse_arguments "$@"
 
 # Create a container and remove it on exit
 # shellcheck disable=SC2086
-container="$(dosh $doshopts --detach)"
+container="$(dosh "${doshopts[@]}" --detach)"
 trap 'docker rm -f $container' 0
 
 # Run make and set docker shell as default shell
 set -- "${makeopts[@]}"
-exec make SHELL="dosh $shell_doshopts --exec $container" "$@"
+exec make SHELL="dosh ${shell_doshopts[*]} --exec $container" "$@"
