@@ -48,11 +48,10 @@ parse_arguments() {
 			shift
 		elif [ "$1" = "-C" ] || [ "$1" = "--directory" ]; then
 			doshopts+=("--directory" "$2")
-			makeopts[${#makeopts[*]}]="$1"
-			makeopts[${#makeopts[*]}]="$2"
+			makeopts+=("$1" "$2")
 			shift
 		else
-			makeopts[${#makeopts[*]}]="$1"
+			makeopts+=("$1")
 		fi
 		shift
 	done
