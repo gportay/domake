@@ -9,6 +9,7 @@ PREFIX ?= /usr/local
 
 .PHONY: all
 all:
+	@eval $$(cat /etc/os*release); echo $$NAME
 
 .PHONY: doc
 doc: domake.1.gz
