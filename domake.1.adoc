@@ -26,7 +26,7 @@ For a more thorough description of *make(1)*, please refers to its manual.
 	Path to the Dockerfile to use.
 
 **-C or --directory DIR**
-	Change to directory dir before doing anything else.
+	Change to directory before doing anything else.
 
 **--shell SHELL**
 	Set shell interpretor.
