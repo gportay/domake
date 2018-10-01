@@ -56,6 +56,14 @@ result() {
 PATH="$PWD:$PATH"
 trap result 0
 
+export -n DOCKER
+export -n DOSHELL
+export -n DOSH_DOCKERFILE
+export -n DOSH_DOCKER_BUILD_EXTRA_OPTS
+export -n DOSH_DOCKER_RMI_EXTRA_OPTS
+export -n DOSH_DOCKER_RUN_EXTRA_OPTS
+export -n DOSH_DOCKER_EXEC_EXTRA_OPTS
+
 run "domake: Test default target with (Makefile from stdin)"
 if echo -e "all:\n\t@cat /etc/os*release" | \
    domake "$@" -f - | tee /dev/stderr | \
