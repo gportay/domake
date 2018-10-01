@@ -52,7 +52,7 @@ while [ "$#" -ne 0 ]; do
 		shell_doshopts+=("--shell" "$2")
 		shift
 	elif [[ "$1" =~ ^DOSHELL=.* ]]; then
-		eval "$1"
+		eval export "$1"
 	elif [[ "$1" =~ ^DOCKER=.* ]]; then
 		eval export "$1"
 	elif [ "$1" = "-F" ] || [ "$1" = "--dockerfile" ]; then
