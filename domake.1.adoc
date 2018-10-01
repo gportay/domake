@@ -30,7 +30,7 @@ For a more thorough description of *make(1)*, please refers to its manual.
 
 **--shell SHELL**
 	Set shell interpretor.
-	Equivalent to set DOSHELL=/bin/sh.
+	Equivalent to set DOSHELL=SHELL.
 
 **-V or --version**
 	Print version.

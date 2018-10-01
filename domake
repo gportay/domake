@@ -22,7 +22,7 @@ Options:
       -F or --dockerfile FILE   Path to the Dockerfile to use.
       -C or --directory DIR     Change to directory before doing anything else.
             --shell SHELL       Set shell interpretor.
-                                Equivalent to set DOSHELL=/bin/sh.
+                                Equivalent to set DOSHELL=SHELL.
       -V or --version           Print version.
       -h or --help              Print usage.
 
