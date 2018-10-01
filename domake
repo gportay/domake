@@ -22,7 +22,7 @@ Options:
       -F or --dockerfile FILE   Path to the Dockerfile to use.
       -C or --directory DIR     Change to directory before doing anything else.
             --shell SHELL       Set shell interpretor.
-                                Equivalent to set DOSHELL=SHELL.
+                                Equivalent to set DOSHELL=<SHELL>.
       -V or --version           Print version.
       -h or --help              Print usage.
 
@@ -31,7 +31,7 @@ Environment variables:
 
       DOSHELL                   The full pathname to the shell to run in docker
                                 image.
-                                Equivalent to --shell SHELL.
+                                Equivalent to --shell <SHELL>.
 EOF
 }
 

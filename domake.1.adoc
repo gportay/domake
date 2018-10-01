@@ -30,7 +30,7 @@ For a more thorough description of *make(1)*, please refers to its manual.
 
 **--shell SHELL**
 	Set shell interpretor.
-	Equivalent to set DOSHELL=SHELL.
+	Equivalent to set DOSHELL=<SHELL>.
 
 **-V or --version**
 	Print version.
@@ -45,7 +45,7 @@ For a more thorough description of *make(1)*, please refers to its manual.
 
 **DOSHELL**
 	The full pathname to the shell to run in docker image.
-	Equivalent to --shell SHELL.
+	Equivalent to --shell <SHELL>.
 
 == EXAMPLES
 
