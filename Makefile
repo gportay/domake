@@ -94,6 +94,11 @@ endif
 commit-check:
 	git rebase -i -x "$(MAKE) check && $(MAKE) tests"
 
+.PHONY: bump-PKGBUILD
+bump-PKGBUILD: aur
+	cp PKGBUILD.aur PKGBUILD
+	git commit PKGBUILD --patch --message "PKGBUILD: update release $$(bash domake --version) checksum"
+
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
