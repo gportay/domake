@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2017-2019 Gaël PORTAY <gael.portay@savoirfairelinux.com>
+# Copyright (c) 2017-2019 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
