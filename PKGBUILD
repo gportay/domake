@@ -20,13 +20,8 @@ build() {
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
 
-	install -d "$pkgdir/usr/bin/"
-	install -m 755 domake "$pkgdir/usr/bin/"
-	install -d "$pkgdir/usr/share/man/man1/"
-	install -m 644 domake.1.gz "$pkgdir/usr/share/man/man1/"
-	install -d "$pkgdir/usr/share/bash-completion/completions"
-	install -m 644 bash-completion \
-	           "$pkgdir/usr/share/bash-completion/completions"
-	install -d "$pkgdir/usr/share/licenses/$pkgname/"
-	install -m 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/"
+	install -D -m 755 domake "$pkgdir/usr/bin/domake"
+	install -D -m 644 domake.1.gz "$pkgdir/usr/share/man/man1/domake.1.gz"
+	install -D -m 644 bash-completion "$pkgdir/usr/share/bash-completion/completions/domake"
+	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
