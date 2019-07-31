@@ -9,15 +9,21 @@ url='https://github.com/gportay/$pkgname'
 license=('MIT')
 depends=('docker' 'dosh')
 makedepends=('asciidoctor')
+checkdepends=('shellcheck')
 source=("https://github.com/gportay/$pkgname/archive/$pkgver.tar.gz")
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
 	make doc
 }
 
+check() {
+	cd "$pkgname-$pkgver"
+	make -k check
+}
+
 package() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd "$pkgname-$pkgver"
 	install -D -m 755 domake "$pkgdir/usr/bin/domake"
 	install -D -m 644 domake.1.gz "$pkgdir/usr/share/man/man1/domake.1.gz"
 	install -D -m 644 bash-completion "$pkgdir/usr/share/bash-completion/completions/domake"
