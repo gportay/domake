@@ -71,7 +71,7 @@ bump:
 	sed -e "/^VERSION=/s,$$old,$(BUMP_VERSION)," -i domake; \
 	sed -e "/^:man source:/s,$$old,$(BUMP_VERSION)," -i domake.1.adoc; \
 	sed -e "/^pkgver=/s,$$old,$(BUMP_VERSION)," -e "/^pkgrel=/s,=.*,=1," -i PKGBUILD
-	git commit domake domake.1.adoc PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
+	git commit --gpg-sign domake domake.1.adoc PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
 	git tag --sign --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
 else
 .SILENT: bump-major
