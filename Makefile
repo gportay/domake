@@ -64,6 +64,7 @@ check: domake
 
 ifneq (,$(BUMP_VERSION))
 .SILENT: bump
+.PHONY: bump
 bump:
 	! git tag | grep "$(BUMP_VERSION)"
 	old="$$(bash domake --version)"; \
@@ -74,12 +75,14 @@ bump:
 	git tag --sign --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
 else
 .SILENT: bump-major
+.PHONY: bump-major
 bump-major:
 	old="$$(bash domake --version)"; \
 	new="$$(($${old%.*}+1)).0"; \
 	$(MAKE) bump "BUMP_VERSION=$$new"
 
 .SILENT: bump-minor
+.PHONY: bump-minor
 bump-minor:
 	old="$$(bash domake --version)"; \
 	new="$${old%.*}.$$(($${old##*.}+1))"; \
