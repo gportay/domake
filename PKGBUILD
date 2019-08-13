@@ -11,6 +11,7 @@ depends=('docker' 'dosh')
 makedepends=('asciidoctor')
 checkdepends=('shellcheck')
 source=("https://github.com/gportay/$pkgname/archive/$pkgver.tar.gz")
+validpgpkeys=('8F3491E60E62695ED780AC672FA122CA0501CA71')
 
 build() {
 	cd "$pkgname-$pkgver"
