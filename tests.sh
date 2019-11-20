@@ -66,6 +66,26 @@ export -n DOSH_DOCKER_RMI_EXTRA_OPTS
 export -n DOSH_DOCKER_RUN_EXTRA_OPTS
 export -n DOSH_DOCKER_EXEC_EXTRA_OPTS
 
+run "domake: Test option --help"
+if domake --help | \
+   grep '^Usage: '
+then
+	ok
+else
+	ko
+fi
+echo
+
+run "domake: Test option --version"
+if domake --version | \
+   grep -E '^([0-9a-zA-Z]+)(\.[0-9a-zA-Z]+)*$'
+then
+	ok
+else
+	ko
+fi
+echo
+
 run "domake: Test default target with (Makefile from stdin)"
 if echo -e "all:\n\t@cat /etc/os*release" | \
    domake "$@" -f - | tee /dev/stderr | \
