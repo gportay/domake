@@ -54,6 +54,10 @@ user-install user-install-doc user-install-bash-completion user-uninstall:
 user-%:
 	$(MAKE) $* PREFIX=$$HOME/.local BASHCOMPLETIONSDIR=$$HOME/.local/share/bash-completion/completions
 
+.PHONY: ci
+ci: export EXIT_ON_ERROR = 1
+ci: check tests
+
 .PHONY: tests
 tests:
 	@./tests.sh
