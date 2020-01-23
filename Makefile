@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2017-2019 Gaël PORTAY
+# Copyright (c) 2017-2020 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
@@ -60,7 +60,7 @@ ci: check coverage
 
 .PHONY: tests
 tests:
-	@./tests.sh
+	@./tests.bash
 
 .PHONY: check
 check: domake
@@ -68,7 +68,7 @@ check: domake
 
 .PHONY: coverage
 coverage:
-	kcov $(CURDIR)/$@ --include-path=domake $(CURDIR)/tests.sh
+	kcov $(CURDIR)/$@ --include-path=domake $(CURDIR)/tests.bash
 
 ifneq (,$(BUMP_VERSION))
 .SILENT: bump
