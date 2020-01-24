@@ -64,7 +64,7 @@ result() {
 }
 
 PATH="$PWD:$PATH"
-trap result 0
+trap result 0 SIGINT
 
 export -n DOCKER
 export -n DOSHELL
