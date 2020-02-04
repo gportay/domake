@@ -73,6 +73,7 @@ coverage:
 ifneq (,$(BUMP_VERSION))
 .SILENT: bump
 .PHONY: bump
+bump: export GPG_TTY ?= $(shell tty)
 bump:
 	! git tag | grep "^$(BUMP_VERSION)$$"
 	old="$$(bash domake --version)"; \
