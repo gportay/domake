@@ -18,12 +18,12 @@ Runs on top of make using dosh as default shell.
 For a more thorough description of make, please refers to its help.
 
 Options:
-      -F or --dockerfile FILE   Path to the Dockerfile to use.
+      --dockerfile FILE         Path to the Dockerfile to use.
       -C or --directory DIR     Change to directory before doing anything else.
             --shell SHELL       Set shell interpretor.
                                 Equivalent to set DOSHELL=<SHELL>.
-      -V or --version           Print version.
-      -h or --help              Print usage.
+      --version                 Print version.
+      --help                    Print usage.
 
 Environment variables:
       DOCKER                    The docker executable.
@@ -34,18 +34,18 @@ Environment variables:
 EOF
 }
 
-# Intercept -C option, and strip -F option
+# Intercept -C option, and strip --dockerfile option
 makeopts=()
 doshopts=("--verbose")
 shell_doshopts=()
 DOCKER="${DOCKER:-docker}"
 while [ "$#" -ne 0 ]
 do
-	if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+	if [ "$1" = "--help" ]
 	then
 		usage
 		exit 0
-	elif [ "$1" = "-V" ] || [ "$1" = "--version" ]
+	elif [ "$1" = "--version" ]
 	then
 		echo "$VERSION"
 		exit
@@ -60,7 +60,7 @@ do
 	elif [[ "$1" =~ ^DOCKER=.* ]]
 	then
 		eval export "$1"
-	elif [ "$1" = "-F" ] || [ "$1" = "--dockerfile" ]
+	elif [ "$1" = "--dockerfile" ]
 	then
 		doshopts+=("--dockerfile" "$2")
 		shift
