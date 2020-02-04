@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2017-2018 Gaël PORTAY
+# Copyright (c) 2017-2018, 2020 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
@@ -39,25 +39,33 @@ makeopts=()
 doshopts=("--verbose")
 shell_doshopts=()
 DOCKER="${DOCKER:-docker}"
-while [ "$#" -ne 0 ]; do
-	if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+while [ "$#" -ne 0 ]
+do
+	if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+	then
 		usage
 		exit 0
-	elif [ "$1" = "-V" ] || [ "$1" = "--version" ]; then
+	elif [ "$1" = "-V" ] || [ "$1" = "--version" ]
+	then
 		echo "$VERSION"
 		exit
-	elif [ "$1" = "--shell" ]; then
+	elif [ "$1" = "--shell" ]
+	then
 		doshopts+=("--shell" "$2")
 		shell_doshopts+=("--shell" "$2")
 		shift
-	elif [[ "$1" =~ ^DOSHELL=.* ]]; then
+	elif [[ "$1" =~ ^DOSHELL=.* ]]
+	then
 		eval export "$1"
-	elif [[ "$1" =~ ^DOCKER=.* ]]; then
+	elif [[ "$1" =~ ^DOCKER=.* ]]
+	then
 		eval export "$1"
-	elif [ "$1" = "-F" ] || [ "$1" = "--dockerfile" ]; then
+	elif [ "$1" = "-F" ] || [ "$1" = "--dockerfile" ]
+	then
 		doshopts+=("--dockerfile" "$2")
 		shift
-	elif [ "$1" = "-C" ] || [ "$1" = "--directory" ]; then
+	elif [ "$1" = "-C" ] || [ "$1" = "--directory" ]
+	then
 		doshopts+=("--directory" "$2")
 		makeopts+=("$1" "$2")
 		shift

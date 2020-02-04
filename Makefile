@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2017-2019 Gaël PORTAY
+# Copyright (c) 2017-2020 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
@@ -28,9 +28,9 @@ install-doc:
 
 .PHONY: install-bash-completion
 install-bash-completion:
-	completionsdir=$$(pkg-config --define-variable=prefix=$(PREFIX) \
+	completionsdir=$${BASHCOMPLETIONSDIR:-$$(pkg-config --define-variable=prefix=$(PREFIX) \
 	                             --variable=completionsdir \
-	                             bash-completion); \
+	                             bash-completion)}; \
 	if [ -n "$$completionsdir" ]; then \
 		install -d $(DESTDIR)$$completionsdir/; \
 		install -m 644 bash-completion $(DESTDIR)$$completionsdir/domake; \
@@ -40,9 +40,9 @@ install-bash-completion:
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/domake
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
-	completionsdir=$$(pkg-config --define-variable=prefix=$(PREFIX) \
+	completionsdir=$${BASHCOMPLETIONSDIR:-$$(pkg-config --define-variable=prefix=$(PREFIX) \
 	                             --variable=completionsdir \
-	                             bash-completion); \
+	                             bash-completion)}; \
 	if [ -n "$$completionsdir" ]; then \
 		rm -f $(DESTDIR)$$completionsdir/domake; \
 	fi
@@ -52,41 +52,54 @@ user-install-all: user-install user-install-doc user-install-bash-completion
 
 user-install user-install-doc user-install-bash-completion user-uninstall:
 user-%:
-	$(MAKE) $* PREFIX=$$HOME/.local
+	$(MAKE) $* PREFIX=$$HOME/.local BASHCOMPLETIONSDIR=$$HOME/.local/share/bash-completion/completions
+
+.PHONY: ci
+ci: export EXIT_ON_ERROR = 1
+ci: check coverage
 
 .PHONY: tests
 tests:
-	@./tests.sh
+	@./tests.bash
 
 .PHONY: check
 check: domake
 	shellcheck $^
 
+.PHONY: coverage
+coverage:
+	kcov $(CURDIR)/$@ --include-path=domake $(CURDIR)/tests.bash
+
 ifneq (,$(BUMP_VERSION))
 .SILENT: bump
+.PHONY: bump
 bump:
-	! git tag | grep "$(BUMP_VERSION)"
+	! git tag | grep "^$(BUMP_VERSION)$$"
 	old="$$(bash domake --version)"; \
 	sed -e "/^VERSION=/s,$$old,$(BUMP_VERSION)," -i domake; \
 	sed -e "/^:man source:/s,$$old,$(BUMP_VERSION)," -i domake.1.adoc; \
 	sed -e "/^pkgver=/s,$$old,$(BUMP_VERSION)," -e "/^pkgrel=/s,=.*,=1," -i PKGBUILD
-	git commit domake domake.1.adoc PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
-	git tag --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
+	git commit --gpg-sign domake domake.1.adoc PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
+	git tag --sign --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
 else
 .SILENT: bump-major
+.PHONY: bump-major
 bump-major:
 	old="$$(bash domake --version)"; \
-	new="$$(($${old%.*}+1)).0"; \
+	new="$$(($${old%.*}+1))"; \
 	$(MAKE) bump "BUMP_VERSION=$$new"
 
 .SILENT: bump-minor
+.PHONY: bump-minor
 bump-minor:
 	old="$$(bash domake --version)"; \
+	if [ "$${old%.*}" = "$$old" ]; then old="$$old.0"; fi; \
 	new="$${old%.*}.$$(($${old##*.}+1))"; \
 	$(MAKE) bump "BUMP_VERSION=$$new"
 
 .SILENT: bump
-bump: bump-minor
+.PHONY: bump
+bump: bump-major
 endif
 
 .PHONY: commit-check
@@ -103,6 +116,7 @@ clean:
 	rm -f domake.1.gz
 	rm -f PKGBUILD.aur PKGBUILD.devel *.tar.gz src/*.tar.gz *.pkg.tar.xz \
 	   -R src/domake-*/ pkg/domake/
+	rm -Rf coverage/
 
 .PHONY: aur
 aur: PKGBUILD.aur
@@ -124,8 +138,9 @@ devel: PKGBUILD.devel
 PKGBUILD.devel: PKGBUILD
 	sed -e "/source=/d" \
 	    -e "/md5sums=/d" \
-	    -e "/build() {/,/^}$$/s,\$$srcdir/\$$pkgname-\$$pkgver,\$$startdir,g" \
-	    -e "/package() {/,/^}$$/s,\$$srcdir/\$$pkgname-\$$pkgver,\$$startdir,g" \
+	    -e "/build() {/,/^}$$/s,\$$pkgname-\$$pkgver,\$$startdir,g" \
+	    -e "/check() {/,/^}$$/s,\$$pkgname-\$$pkgver,\$$startdir,g" \
+	    -e "/package() {/,/^}$$/s,\$$pkgname-\$$pkgver,\$$startdir,g" \
 	    -e "/pkgver=/apkgver() { printf \"\$$(bash domake --version)r%s.%s\" \"\$$(git rev-list --count HEAD)\" \"\$$(git rev-parse --short HEAD)\"; }" \
 	       $< >$@
 
@@ -133,5 +148,5 @@ PKGBUILD.devel: PKGBUILD
 	asciidoctor -b manpage -o $@ $<
 
 %.gz: %
-	gzip -c $^ >$@
+	gzip -c $< >$@
 

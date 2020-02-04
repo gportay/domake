@@ -1,4 +1,4 @@
-# Maintainer: Gaël PORTAY <gael.portay@savoirfairelinux.com>
+# Maintainer: Gaël PORTAY <gael.portay@gmail.com>
 
 pkgname=domake
 pkgver=master
@@ -9,22 +9,22 @@ url='https://github.com/gportay/$pkgname'
 license=('MIT')
 depends=('docker' 'dosh')
 makedepends=('asciidoctor')
+checkdepends=('shellcheck')
 source=("https://github.com/gportay/$pkgname/archive/$pkgver.tar.gz")
+validpgpkeys=('8F3491E60E62695ED780AC672FA122CA0501CA71')
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
-
+	cd "$pkgname-$pkgver"
 	make doc
 }
 
-package() {
-	cd "$srcdir/$pkgname-$pkgver"
+check() {
+	cd "$pkgname-$pkgver"
+	make -k check
+}
 
-	install -d "$pkgdir/usr/bin/"
-	install -m 755 domake "$pkgdir/usr/bin/"
-	install -d "$pkgdir/usr/share/man/man1/"
-	install -m 644 domake.1.gz "$pkgdir/usr/share/man/man1/"
-	install -d "$pkgdir/usr/share/bash-completion/completions"
-	install -m 644 bash-completion \
-	           "$pkgdir/usr/share/bash-completion/completions"
+package() {
+	cd "$pkgname-$pkgver"
+	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc
+	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }

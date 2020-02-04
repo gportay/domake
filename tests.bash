@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2017-2019 Gaël PORTAY
+# Copyright (c) 2017-2020 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
@@ -21,6 +21,10 @@ ok() {
 ko() {
 	ko=$((ko+1))
 	echo -e "\e[1m$test: \e[31m[KO]\e[0m"
+	if [[ $EXIT_ON_ERROR ]]
+	then
+		exit 1
+	fi
 }
 
 fix() {
@@ -34,26 +38,38 @@ bug() {
 }
 
 result() {
-	if [ -n "$ok" ]; then
+	exitcode="$?"
+
+	if [[ $ok ]]
+	then
 		echo -e "\e[1m\e[32m$ok test(s) succeed!\e[0m"
 	fi
 
-	if [ -n "$fix" ]; then
+	if [[ $fix ]]
+	then
 		echo -e "\e[1m\e[34m$fix test(s) fixed!\e[0m" >&2
 	fi
 
-	if [ -n "$bug" ]; then
+	if [[ $bug ]]
+	then
 		echo -e "\e[1mWarning: \e[33m$bug test(s) bug!\e[0m" >&2
 	fi
 
-	if [ -n "$ko" ]; then
+	if [[ $ko ]]
+	then
 		echo -e "\e[1mError: \e[31m$ko test(s) failed!\e[0m" >&2
-		exit 1
 	fi
+
+	if [[ $exitcode -ne 0 ]] && [[ $ko -eq 0 ]]
+	then
+		echo -e "\e[1;31mExited!\e[0m" >&2
+	fi
+
+	exit "$exitcode"
 }
 
 PATH="$PWD:$PATH"
-trap result 0
+trap result 0 SIGINT
 
 export -n DOCKER
 export -n DOSHELL
@@ -63,7 +79,27 @@ export -n DOSH_DOCKER_RMI_EXTRA_OPTS
 export -n DOSH_DOCKER_RUN_EXTRA_OPTS
 export -n DOSH_DOCKER_EXEC_EXTRA_OPTS
 
-run "domake: Test default target with (Makefile from stdin)"
+run "Test option --help"
+if domake --help | \
+   grep '^Usage: '
+then
+	ok
+else
+	ko
+fi
+echo
+
+run "Test option --version"
+if domake --version | \
+   grep -E '^([0-9a-zA-Z]+)(\.[0-9a-zA-Z]+)*$'
+then
+	ok
+else
+	ko
+fi
+echo
+
+run "Test default target with (Makefile from stdin)"
 if echo -e "all:\n\t@cat /etc/os*release" | \
    domake "$@" -f - | tee /dev/stderr | \
    grep -q 'PRETTY_NAME="Ubuntu 16.04[.0-9]* LTS"'
@@ -74,7 +110,7 @@ else
 fi
 echo
 
-run "domake: Test option -F with relative path (Makefile from stdin)"
+run "Test option -F with relative path (Makefile from stdin)"
 if ( echo -e "all:\n\t@cat /etc/os*release" | \
      domake "$@" -f - -F Dockerfile.fedora | tee /dev/stderr | \
      grep -q 'PRETTY_NAME="Fedora 25 (Twenty Five)' )
@@ -85,7 +121,7 @@ else
 fi
 echo
 
-run "domake: Test option -C with relative path (Makefile from stdin)"
+run "Test option -C with relative path (Makefile from stdin)"
 if ( cd .. && dir="${OLDPWD##*/}" && \
      echo -e "all:\n\t@cat /etc/os*release" | \
      domake "$@" -f - -C "$dir" | tee /dev/stderr | \
@@ -97,7 +133,7 @@ else
 fi
 echo
 
-run "domake: Test option -C with absolute path (Makefile from stdin)"
+run "Test option -C with absolute path (Makefile from stdin)"
 if ( cd /tmp && dir="$OLDPWD" && \
      echo -e "all:\n\t@cat /etc/os*release" | \
      domake "$@" -f - -C "$dir" | tee /dev/stderr | \
@@ -109,7 +145,7 @@ else
 fi
 echo
 
-run "domake: Test option --shell SHELL with a busybox based distro (/bin/ash)"
+run "Test option --shell SHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
      DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
      grep -q 'SHELL=/bin/sh' )
@@ -120,7 +156,7 @@ else
 fi
 echo
 
-run "domake: Test overriding existent \$DOSHELL with a busybox based distro (/bin/ash)"
+run "Test overriding existent \$DOSHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
      DOSHELL=/bin/ash domake "$@" -f - -F Dockerfile.alpine | tee /dev/stderr | \
      grep -q 'SHELL=/bin/ash' )
@@ -131,7 +167,7 @@ else
 fi
 echo
 
-run "domake: Test overriding nonexistent \$DOSHELL and option --shell SHELL with a busybox based distro (/bin/ash)"
+run "Test overriding nonexistent \$DOSHELL and option --shell SHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
      DOSHELL=/bin/zsh domake "$@" -f - -F Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
      grep -q 'SHELL=/bin/sh' )
@@ -142,7 +178,7 @@ else
 fi
 echo
 
-run "domake: Test overriding existent \$DOSHELL in command line argument with a busybox based distro (/bin/ash)"
+run "Test overriding existent \$DOSHELL in command line argument with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
      domake "$@" -f - -F Dockerfile.alpine DOSHELL=/bin/ash | tee /dev/stderr | \
      grep -q 'SHELL=/bin/ash' )
@@ -153,7 +189,7 @@ else
 fi
 echo
 
-run "domake: Test \$DOCKER environment variable"
+run "Test \$DOCKER environment variable"
 if ( id="$(dosh --tag)"; \
      echo -e "all:\n\t@echo SHELL=\$\$0" | \
      DOCKER="echo docker" domake "$@" -f - --no-print-directory DOCKER='echo docker' | tee /dev/stderr | \
