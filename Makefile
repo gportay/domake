@@ -98,6 +98,7 @@ bump-minor:
 	$(MAKE) bump "BUMP_VERSION=$$new"
 
 .SILENT: bump
+.PHONY: bump
 bump: bump-major
 endif
 
