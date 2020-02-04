@@ -9,6 +9,17 @@ container
 
 [domake](domake) runs on top of *make(1)* using [dosh(1)][1] as default _shell_.
 
+## DOWNLOAD
+
+Give it a try right now by fetching your own copy!
+
+*Version* | *Checksum* (\*)                  |
+--------- | -------------------------------- |
+[1]       | f5cec4cbe3c0823a82fa19bf3ec07b16 |
+
+\*: Note that hashes are subject to change as GitHub might update tarball
+generation.
+
 ## DOCUMENTATION
 
 Using *domake(1)* and _Makefile_
@@ -56,3 +67,4 @@ This program is free software: you can redistribute it and/or modify it under
 the terms of the MIT License.
 
 [1]: https://www.github.com/gportay/dosh/blob/master/dosh.1.adoc
+[1]: https://github.com/gportay/domake/archive/1.tar.gz
