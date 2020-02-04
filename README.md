@@ -7,7 +7,7 @@ container
 
 ## DESCRIPTION
 
-[domake](domake) runs on top of *make(1)* using [dosh(1)][1] as default _shell_.
+[domake](domake) runs on top of *make(1)* using [dosh(1)] as default _shell_.
 
 ## DOWNLOAD
 
@@ -66,5 +66,5 @@ Copyright (c) 2017-2018, 2020 Gaël PORTAY
 This program is free software: you can redistribute it and/or modify it under
 the terms of the MIT License.
 
-[1]: https://www.github.com/gportay/dosh/blob/master/dosh.1.adoc
+[dosh(1)]: https://www.github.com/gportay/dosh/blob/master/dosh.1.adoc
 [1]: https://github.com/gportay/domake/archive/1.tar.gz
