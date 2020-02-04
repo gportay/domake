@@ -1,7 +1,7 @@
 # Maintainer: Gaël PORTAY <gael.portay@gmail.com>
 
 pkgname=domake
-pkgver=master
+pkgver=1
 pkgrel=1
 pkgdesc='Docker make'
 arch=('any')
