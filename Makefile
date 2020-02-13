@@ -18,13 +18,11 @@ install-all: install install-doc install-bash-completion
 
 .PHONY: install
 install:
-	install -d $(DESTDIR)$(PREFIX)/bin/
-	install -m 755 domake $(DESTDIR)$(PREFIX)/bin/
+	install -D -m 755 domake $(DESTDIR)$(PREFIX)/bin/domake
 
 .PHONY: install-doc
 install-doc:
-	install -d $(DESTDIR)$(PREFIX)/share/man/man1/
-	install -m 644 domake.1.gz $(DESTDIR)$(PREFIX)/share/man/man1/
+	install -D -m 644 domake.1.gz $(DESTDIR)$(PREFIX)/share/man/man1/
 
 .PHONY: install-bash-completion
 install-bash-completion:
@@ -32,8 +30,7 @@ install-bash-completion:
 	                             --variable=completionsdir \
 	                             bash-completion)}; \
 	if [ -n "$$completionsdir" ]; then \
-		install -d $(DESTDIR)$$completionsdir/; \
-		install -m 644 bash-completion $(DESTDIR)$$completionsdir/domake; \
+		install -D -m 644 bash-completion $(DESTDIR)$$completionsdir/domake; \
 	fi
 
 .PHONY: uninstall
