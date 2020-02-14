@@ -116,6 +116,10 @@ clean:
 	   -R src/domake-*/ pkg/domake/
 	rm -Rf coverage/
 
+.PHONY: updpkgsums
+updpkgsums:
+	updpkgsums
+
 .PHONY: aur
 aur: PKGBUILD.aur
 	makepkg --force --syncdeps -p $^
