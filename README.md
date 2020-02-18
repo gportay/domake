@@ -13,9 +13,9 @@ container
 
 Give it a try right now by fetching your own copy!
 
-*Version* | *Checksum* (\*)                  |
---------- | -------------------------------- |
-[1]       | f5cec4cbe3c0823a82fa19bf3ec07b16 |
+*Version* | *Checksum* (\*)                                                  |
+--------- | ---------------------------------------------------------------- |
+[1]       | bc93dc89527e52d25f6533924e24a961787e6efbd7305ea92615458f5e3fe30e |
 
 \*: Note that hashes are subject to change as GitHub might update tarball
 generation.
