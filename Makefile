@@ -18,13 +18,11 @@ install-all: install install-doc install-bash-completion
 
 .PHONY: install
 install:
-	install -d $(DESTDIR)$(PREFIX)/bin/
-	install -m 755 domake $(DESTDIR)$(PREFIX)/bin/
+	install -D -m 755 domake $(DESTDIR)$(PREFIX)/bin/domake
 
 .PHONY: install-doc
 install-doc:
-	install -d $(DESTDIR)$(PREFIX)/share/man/man1/
-	install -m 644 domake.1.gz $(DESTDIR)$(PREFIX)/share/man/man1/
+	install -D -m 644 domake.1.gz $(DESTDIR)$(PREFIX)/share/man/man1/
 
 .PHONY: install-bash-completion
 install-bash-completion:
@@ -32,8 +30,7 @@ install-bash-completion:
 	                             --variable=completionsdir \
 	                             bash-completion)}; \
 	if [ -n "$$completionsdir" ]; then \
-		install -d $(DESTDIR)$$completionsdir/; \
-		install -m 644 bash-completion $(DESTDIR)$$completionsdir/domake; \
+		install -D -m 644 bash-completion $(DESTDIR)$$completionsdir/domake; \
 	fi
 
 .PHONY: uninstall
@@ -103,47 +100,35 @@ bump-minor:
 bump: bump-major
 endif
 
+.PHONY: bump-PKGBUILD
+bump-PKGBUILD: updpkgsums
+	git commit PKGBUILD --patch --message "PKGBUILD: update release $$(bash domake --version) checksum"
+
 .PHONY: commit-check
 commit-check:
 	git rebase -i -x "$(MAKE) check && $(MAKE) tests"
 
-.PHONY: bump-PKGBUILD
-bump-PKGBUILD: aur
-	cp PKGBUILD.aur PKGBUILD
-	git commit PKGBUILD --patch --message "PKGBUILD: update release $$(bash domake --version) checksum"
-
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
-	rm -f PKGBUILD.aur PKGBUILD.devel *.tar.gz src/*.tar.gz *.pkg.tar.xz \
-	   -R src/domake-*/ pkg/domake/
+	rm -f PKGBUILD.tmp *.tar.gz src/*.tar.gz *.pkg.tar.xz \
+	   -R src/dosh-*/ pkg/domake-*/ domake-git/
 	rm -Rf coverage/
 
+.PHONY: updpkgsums
+updpkgsums:
+	updpkgsums
+
 .PHONY: aur
-aur: PKGBUILD.aur
+aur:
+	makepkg --force --syncdeps
+
+.PHONY: aur-git
+aur-git: PKGBUILD.tmp
 	makepkg --force --syncdeps -p $^
 
-PKGBUILD.aur: PKGBUILD
-	cp $< $@.tmp
-	makepkg --nobuild --nodeps --skipinteg -p $@.tmp
-	md5sum="$$(makepkg --geninteg -p $@.tmp)"; \
-	sed -e "/md5sums=/d" \
-	    -e "/source=/a$$md5sum" \
-	    -i $@.tmp
-	mv $@.tmp $@
-
-.PHONY: devel
-devel: PKGBUILD.devel
-	makepkg --force --syncdeps -p $^
-
-PKGBUILD.devel: PKGBUILD
-	sed -e "/source=/d" \
-	    -e "/md5sums=/d" \
-	    -e "/build() {/,/^}$$/s,\$$pkgname-\$$pkgver,\$$startdir,g" \
-	    -e "/check() {/,/^}$$/s,\$$pkgname-\$$pkgver,\$$startdir,g" \
-	    -e "/package() {/,/^}$$/s,\$$pkgname-\$$pkgver,\$$startdir,g" \
-	    -e "/pkgver=/apkgver() { printf \"\$$(bash domake --version)r%s.%s\" \"\$$(git rev-list --count HEAD)\" \"\$$(git rev-parse --short HEAD)\"; }" \
-	       $< >$@
+PKGBUILD.tmp: PKGBUILD-git
+	cp $< $@
 
 %.1: %.1.adoc
 	asciidoctor -b manpage -o $@ $<
