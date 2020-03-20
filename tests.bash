@@ -195,8 +195,8 @@ if ( id="$(dosh --tag)"; \
      DOCKER="echo docker" domake "$@" -f - --no-print-directory DOCKER='echo docker' | tee /dev/stderr | \
      diff - <(echo "\
 exec --user ${GROUPS[0]}:${GROUPS[0]} --workdir $PWD \
-run /bin/sh --volume $PWD:$PWD --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id -c echo SHELL=\$0
-rm -f run --detach --volume $PWD:$PWD --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id"
+run /bin/sh --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id -c echo SHELL=\$0
+rm -f run --detach --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id"
 ))
 then
 	ok
