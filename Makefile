@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2017-2020 Gaël PORTAY
+# Copyright (c) 2017-2020, 2023 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
@@ -55,8 +55,8 @@ user-%:
 ci: export EXIT_ON_ERROR = 1
 ci: check coverage
 
-.PHONY: tests
-tests:
+.PHONY: test tests
+test tests:
 	@./tests.bash
 
 .PHONY: check
