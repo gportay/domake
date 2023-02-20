@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+# Copyright (c) 2023 Gaël PORTAY
+#
+# SPDX-License-Identifier: MIT
+#
+
+if [[ "$1" == "docker-cli-plugin-metadata" ]]
+then
+	cat <<EOF
+{
+	"SchemaVersion":"0.1.0",
+	"Vendor":"Gaël PORTAY",
+	"Version":"$(domake --version)",
+	"ShortDescription":"Runs on top of make using docker shell as default shell.",
+	"URL":"https://www.portay.io/domake/"
+}
+EOF
+	exit 0
+fi
+
+if [[ "$1" == "help" ]]
+then
+	cat <<EOF
+Usage:  docker make [OPTIONS] [TARGET...]
+
+Runs on top of make using docker shell as default shell.
+
+For a more thorough description of make, please refers to its help.
+
+docker-make is a wrapper on top of domake; For a more thorough description of
+domake, please refers to its help.
+
+Options:
+  --dockerfile string      Path to the Dockerfile to use.
+  -C or --directory string Change to directory before doing anything else.
+  --shell string           Set shell interpretor.
+  --version                Print version.
+  --help                   Print usage.
+  --version                Print version.
+  --help                   Print usage.
+EOF
+	exit 0
+fi
+
+# Called as docker-make make
+shift
+exec domake "$@"
