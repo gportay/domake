@@ -35,6 +35,12 @@ Using *domake(1)* and _Makefile_
 
 Run the following command to install *domake(1)*
 
+To your home directory
+
+	$ make user-install
+
+Or, to your system
+
 	$ sudo make install
 
 Traditional variables *DESTDIR* and *PREFIX* can be overridden
@@ -61,7 +67,7 @@ Written by Gaël PORTAY *gael.portay@gmail.com*
 
 ## COPYRIGHT
 
-Copyright 2017-2018,2020,2023 Gaël PORTAY
+Copyright 2017-2018,2020,2023-2024 Gaël PORTAY
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free
