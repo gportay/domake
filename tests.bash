@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2017-2020 Gaël PORTAY
+# Copyright (c) 2017-2020,2023-2024 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
@@ -92,6 +92,12 @@ export -n DOSH_DOCKER_BUILD_EXTRA_OPTS
 export -n DOSH_DOCKER_RMI_EXTRA_OPTS
 export -n DOSH_DOCKER_RUN_EXTRA_OPTS
 export -n DOSH_DOCKER_EXEC_EXTRA_OPTS
+
+no_doshprofile=1
+no_doshrc=1
+
+export no_doshprofile
+export no_doshrc
 
 run "Test option --help"
 if domake --help | \
