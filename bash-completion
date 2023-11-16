@@ -46,8 +46,14 @@ _domake()
 		;;
 	esac
 
+	COMP_WORDS=("${MAKE:-make}" "${COMP_WORDS[@]:2}" "$cur")
+	COMP_LINE="${COMP_WORDS[*]}"
+	COMP_POINT="${#COMP_LINE}"
+	_command_offset 0
+
 	local short_opts="-C"
 	local long_opts="--dockerfile --directory --shell --version --help"
-	COMPREPLY=( $( compgen -W "$short_opts $long_opts" -- "$cur" ) )
+	COMPREPLY+=( $( compgen -W "$short_opts $long_opts" -- "$cur" ) )
+
 } &&
 complete -F _domake domake
