@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2017-2018,2020,2024 Gaël PORTAY
+# Copyright 2017-2018,2020,2023-2024 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
@@ -26,11 +26,11 @@ Options:
       --help                    Print usage.
 
 Environment variables:
-      DOMAKE_DOCKER             The docker executable.
-
       DOSHELL                   The full pathname to the shell to run in docker
                                 image.
                                 Equivalent to --shell <SHELL>.
+
+      DOSHELL_DOCKER            The docker executable.
 EOF
 }
 
@@ -58,11 +58,10 @@ do
 	then
 		[[ "$1" =~ ^([^=]+)=(.*) ]]
 		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
-	elif [[ "$1" =~ ^DOMAKE_DOCKER=.* ]]
+	elif [[ "$1" =~ ^DOSHELL_DOCKER=.* ]]
 	then
 		[[ "$1" =~ ^([^=]+)=(.*) ]]
 		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
-		read -r -a docker <<<"${DOMAKE_DOCKER:-docker}"
 	elif [ "$1" = "--dockerfile" ]
 	then
 		doshopts+=("--dockerfile" "$2")
@@ -80,7 +79,7 @@ done
 
 # Create a container and remove it on exit
 container="$(dosh "${doshopts[@]}" --detach)"
-trap '"${docker[@]:-docker}" rm -f "$container"' 0
+trap 'dosh --rm "$container" --force' 0
 
 # Run make and set docker shell as default shell
 set -- "${makeopts[@]}"
