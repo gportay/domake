@@ -43,7 +43,7 @@ uninstall: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/domake
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
-	rm -Rf $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
+	rm -f $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
 	completionsdir=$${BASHCOMPLETIONSDIR:-$$(pkg-config --define-variable=prefix=$(PREFIX) \
 	                             --variable=completionsdir \
 	                             bash-completion)}; \
