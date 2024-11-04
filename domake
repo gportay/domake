@@ -80,7 +80,7 @@ done
 
 # Create a container and remove it on exit
 container="$(dosh "${doshopts[@]}" --detach)"
-trap '"${docker[@]:-docker}" rm -f $container' 0
+trap '"${docker[@]:-docker}" rm -f "$container"' 0
 
 # Run make and set docker shell as default shell
 set -- "${makeopts[@]}"
