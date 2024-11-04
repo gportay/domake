@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2017-2020,2023 Gaël PORTAY
+# Copyright (c) 2017-2020,2023-2024 Gaël PORTAY
 #
 # SPDX-License-Identifier: MIT
 #
@@ -22,7 +22,7 @@ install:
 
 .PHONY: install-doc
 install-doc:
-	install -D -m 644 domake.1.gz $(DESTDIR)$(PREFIX)/share/man/man1/
+	install -D -m 644 domake.1.gz $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
 
 .PHONY: install-bash-completion
 install-bash-completion:
