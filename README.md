@@ -64,7 +64,9 @@ Written by Gaël PORTAY *gael.portay@gmail.com*
 Copyright (c) 2017-2018,2020,2023 Gaël PORTAY
 
 This program is free software: you can redistribute it and/or modify it under
-the terms of the MIT License.
+the terms of the GNU Lesser General Public License as published by the Free
+Software Foundation, either version 2.1 of the License, or (at your option) any
+later version.
 
 [dosh(1)]: https://www.github.com/gportay/dosh/blob/master/dosh.1.adoc
 [1]: https://github.com/gportay/domake/archive/1.tar.gz
