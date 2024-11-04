@@ -216,7 +216,7 @@ if ( id="$(dosh --tag)"; \
      diff - <(echo "\
 docker exec --user ${GROUPS[0]}:${GROUPS[0]} --workdir $PWD --env DOSHLVL=1 \
 docker /bin/sh run --detach --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id -c echo SHELL=\$0
-rm -f docker run --detach --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id"
+docker rm -f docker run --detach --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id"
 ))
 then
 	ok

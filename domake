@@ -56,10 +56,12 @@ do
 		shift
 	elif [[ "$1" =~ ^DOSHELL=.* ]]
 	then
-		eval export "$1"
+		[[ "$1" =~ ^([^=]+)=(.*) ]]
+		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
 	elif [[ "$1" =~ ^DOMAKE_DOCKER=.* ]]
 	then
-		eval export "$1"
+		[[ "$1" =~ ^([^=]+)=(.*) ]]
+		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
 		read -r -a docker <<<"${DOMAKE_DOCKER:-docker}"
 	elif [ "$1" = "--dockerfile" ]
 	then
