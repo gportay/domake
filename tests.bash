@@ -212,11 +212,11 @@ echo
 run "Test \$DOMAKE_DOCKER environment variable"
 if ( id="$(dosh --tag)"; \
      echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOCKER="echo docker" domake "$@" -f - --no-print-directory DOMAKE_DOCKER='echo docker' | tee /dev/stderr | \
+     DOSH_DOCKER="echo docker" domake "$@" -f - --no-print-directory DOMAKE_DOCKER='echo docker' | tee /dev/stderr | \
      diff - <(echo "\
-exec --user ${GROUPS[0]}:${GROUPS[0]} --workdir $PWD \
-run /bin/sh --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id -c echo SHELL=\$0
-rm -f run --detach --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id"
+docker exec --user ${GROUPS[0]}:${GROUPS[0]} --workdir $PWD --env DOSHLVL=1 \
+docker /bin/sh run --detach --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id -c echo SHELL=\$0
+rm -f docker run --detach --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id"
 ))
 then
 	ok
