@@ -26,7 +26,7 @@ Options:
       --help                    Print usage.
 
 Environment variables:
-      DOCKER                    The docker executable.
+      DOMAKE_DOCKER             The docker executable.
 
       DOSHELL                   The full pathname to the shell to run in docker
                                 image.
@@ -57,10 +57,10 @@ do
 	elif [[ "$1" =~ ^DOSHELL=.* ]]
 	then
 		eval export "$1"
-	elif [[ "$1" =~ ^DOCKER=.* ]]
+	elif [[ "$1" =~ ^DOMAKE_DOCKER=.* ]]
 	then
 		eval export "$1"
-		read -r -a docker <<<"${DOCKER:-docker}"
+		read -r -a docker <<<"${DOMAKE_DOCKER:-docker}"
 	elif [ "$1" = "--dockerfile" ]
 	then
 		doshopts+=("--dockerfile" "$2")

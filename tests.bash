@@ -85,7 +85,7 @@ result() {
 PATH="$PWD:$PATH"
 trap result 0 SIGINT
 
-export -n DOCKER
+export -n DOSH_DOCKER
 export -n DOSHELL
 export -n DOSH_DOCKERFILE
 export -n DOSH_DOCKER_BUILD_EXTRA_OPTS
@@ -209,10 +209,10 @@ else
 fi
 echo
 
-run "Test \$DOCKER environment variable"
+run "Test \$DOMAKE_DOCKER environment variable"
 if ( id="$(dosh --tag)"; \
      echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOCKER="echo docker" domake "$@" -f - --no-print-directory DOCKER='echo docker' | tee /dev/stderr | \
+     DOCKER="echo docker" domake "$@" -f - --no-print-directory DOMAKE_DOCKER='echo docker' | tee /dev/stderr | \
      diff - <(echo "\
 exec --user ${GROUPS[0]}:${GROUPS[0]} --workdir $PWD \
 run /bin/sh --volume $PWD:$PWD:rw --user $UID:${GROUPS[0]} --interactive --workdir $PWD --env DOSHLVL=1 --entrypoint /bin/sh $id -c echo SHELL=\$0
