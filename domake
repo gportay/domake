@@ -77,7 +77,6 @@ do
 done
 
 # Create a container and remove it on exit
-# shellcheck disable=SC2086
 container="$(dosh "${doshopts[@]}" --detach)"
 trap '"${docker[@]:-docker}" rm -f $container' 0
 
