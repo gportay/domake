@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2017-2018,2020 Gaël PORTAY
+# Copyright 2017-2018,2020,2024 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
@@ -36,9 +36,9 @@ EOF
 
 # Intercept -C option, and strip --dockerfile option
 makeopts=()
+docker=()
 doshopts=("--verbose")
 shell_doshopts=()
-DOCKER="${DOCKER:-docker}"
 while [ "$#" -ne 0 ]
 do
 	if [ "$1" = "--help" ]
@@ -60,6 +60,7 @@ do
 	elif [[ "$1" =~ ^DOCKER=.* ]]
 	then
 		eval export "$1"
+		read -r -a docker <<<"${DOCKER:-docker}"
 	elif [ "$1" = "--dockerfile" ]
 	then
 		doshopts+=("--dockerfile" "$2")
@@ -78,7 +79,7 @@ done
 # Create a container and remove it on exit
 # shellcheck disable=SC2086
 container="$(dosh "${doshopts[@]}" --detach)"
-trap '$DOCKER rm -f $container' 0
+trap '"${docker[@]:-docker}" rm -f $container' 0
 
 # Run make and set docker shell as default shell
 set -- "${makeopts[@]}"
