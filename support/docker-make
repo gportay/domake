@@ -21,7 +21,7 @@ fi
 
 if [[ "$1" == "__complete" ]]
 then
-	# Called as docker-shell __complete shell
+	# Called as docker-make __complete make
 	shift
 	shift
 
