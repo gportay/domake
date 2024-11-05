@@ -121,7 +121,7 @@ echo
 
 run "Test default target with (Makefile from stdin)"
 if echo -e "all:\n\t@cat /etc/os*release" | \
-   domake "$@" -f - | tee /dev/stderr | \
+   domake -f - | tee /dev/stderr | \
    grep 'PRETTY_NAME="Ubuntu 16.04[.0-9]* LTS"' >/dev/null
 then
 	ok
@@ -132,7 +132,7 @@ echo
 
 run "Test option --dockerfile with relative path (Makefile from stdin)"
 if ( echo -e "all:\n\t@cat /etc/os*release" | \
-     domake "$@" -f - --dockerfile Dockerfile.fedora | tee /dev/stderr | \
+     domake -f - --dockerfile Dockerfile.fedora | tee /dev/stderr | \
      grep 'PRETTY_NAME="Fedora 25 (Twenty Five)' >/dev/null )
 then
 	ok
@@ -144,7 +144,7 @@ echo
 run "Test option -C with relative path (Makefile from stdin)"
 if ( cd .. && dir="${OLDPWD##*/}" && \
      echo -e "all:\n\t@cat /etc/os*release" | \
-     domake "$@" -f - -C "$dir" | tee /dev/stderr | \
+     domake -f - -C "$dir" | tee /dev/stderr | \
      grep 'PRETTY_NAME="Ubuntu 16.04[.0-9]* LTS"' >/dev/null )
 then
 	ok
@@ -156,7 +156,7 @@ echo
 run "Test option -C with absolute path (Makefile from stdin)"
 if ( cd /tmp && dir="$OLDPWD" && \
      echo -e "all:\n\t@cat /etc/os*release" | \
-     domake "$@" -f - -C "$dir" | tee /dev/stderr | \
+     domake -f - -C "$dir" | tee /dev/stderr | \
      grep 'PRETTY_NAME="Ubuntu 16.04[.0-9]* LTS"' >/dev/null )
 then
 	ok
@@ -167,7 +167,7 @@ echo
 
 run "Test option --shell SHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/zsh domake "$@" -f - --dockerfile Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
+     DOSHELL=/bin/zsh domake -f - --dockerfile Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
      grep 'SHELL=/bin/sh' >/dev/null )
 then
 	ok
@@ -178,7 +178,7 @@ echo
 
 run "Test overriding existent \$DOSHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/ash domake "$@" -f - --dockerfile Dockerfile.alpine | tee /dev/stderr | \
+     DOSHELL=/bin/ash domake -f - --dockerfile Dockerfile.alpine | tee /dev/stderr | \
      grep 'SHELL=/bin/ash' >/dev/null )
 then
 	ok
@@ -189,7 +189,7 @@ echo
 
 run "Test overriding nonexistent \$DOSHELL and option --shell SHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     DOSHELL=/bin/zsh domake "$@" -f - --dockerfile Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
+     DOSHELL=/bin/zsh domake -f - --dockerfile Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
      grep 'SHELL=/bin/sh' >/dev/null )
 then
 	ok
@@ -200,7 +200,7 @@ echo
 
 run "Test overriding existent \$DOSHELL in command line argument with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
-     domake "$@" -f - --dockerfile Dockerfile.alpine DOSHELL=/bin/ash | tee /dev/stderr | \
+     domake -f - --dockerfile Dockerfile.alpine DOSHELL=/bin/ash | tee /dev/stderr | \
      grep 'SHELL=/bin/ash' >/dev/null )
 then
 	ok
@@ -211,7 +211,7 @@ echo
 
 run "Test \$DOSH_DOCKER environment variable"
 if echo -e "all:\n\t@echo SHELL=\$\$0" | \
-   domake "$@" -f - --no-print-directory DOSH_DOCKER='echo docker' | tee /dev/stderr | \
+   domake -f - --no-print-directory DOSH_DOCKER='echo docker' | tee /dev/stderr | \
    grep -q "docker exec --user ${GROUPS[0]}:${GROUPS[0]} --workdir $PWD --env DOSHLVL=1 [0-9a-z]\{64\} /bin/sh -c echo SHELL=\$0"
 then
 	ok
