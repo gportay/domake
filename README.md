@@ -45,11 +45,11 @@ Or, to your system
 
 Traditional variables *DESTDIR* and *PREFIX* can be overridden
 
-	$ sudo PREFIX=/opt/domake make install
+	$ sudo make install PREFIX=/opt/domake
 
 Or
 
-	$ DESTDIR=$PWD/pkg PREFIX=/usr make install
+	$ make install DESTDIR=$PWD/pkg PREFIX=/usr
 
 ## LINKS
 
