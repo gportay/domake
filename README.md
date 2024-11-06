@@ -46,6 +46,10 @@ Check for [man-pages](domake.1.adoc) and its [examples](domake.1.adoc#examples).
 
 Enjoy!
 
+## PATCHES
+
+Sumbit patches at *https://github.com/gportay/domake/pulls*
+
 ## BUGS
 
 Report bugs at *https://github.com/gportay/domake/issues*

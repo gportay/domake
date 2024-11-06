@@ -77,6 +77,10 @@ Change to another _directory_ before doing anything else
 	1395ea836747e96dae36208d74e5cb4e006395beb6bb777c403635bbb0577072
 	$ cd -
 
+== PATCHES
+
+Sumbit patches at *https://github.com/gportay/domake/pulls*
+
 == BUGS
 
 Report bugs at *https://github.com/gportay/domake/issues*
