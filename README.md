@@ -1,5 +1,20 @@
 # Docker Make
 
+## TL;DR;
+
+[domake][domake(1)] is a bash script providing a make CLI to *docker-run(1)*.
+
+It runs every shell command of the Makefile in a docker shell with cwd bind
+mounted to the container built using the Dockerfile.
+
+One think `domake` does...
+
+	docker run --detach [--tty] [--interactive] "--volume=$PWD:$PWD:rw" "--user=$USER" "--entry-point=$SHELL" IMAGE
+	make SHELL="docker exec [--tty] [--interactive] CONTAINER /bin/sh"
+	docker kill CONTAINER
+
+... with a few more magic!
+
 ## NAME
 
 [domake](domake.1.adoc) - maintain program dependencies running commands in
@@ -60,7 +75,7 @@ Written by Gaël PORTAY *gael.portay@gmail.com*
 
 ## COPYRIGHT
 
-Copyright 2017-2018,2020,2023-2024 Gaël PORTAY
+Copyright 2017-2018,2020,2023-2025 Gaël PORTAY
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free
