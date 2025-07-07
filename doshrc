@@ -12,6 +12,9 @@
 case "$DOSH_DOCKERFILE" in
 Dockerfile.pkg) DOSHELL=/bin/bash
 		;;
+Dockerfile.deb) DOSHELL=/bin/bash
+                home=1
+                ;;
 esac
 
 # Uncomment to use the same shell interpreter in container than the one which
