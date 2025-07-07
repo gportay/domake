@@ -21,7 +21,7 @@ pkgver() {
 
 build() {
 	cd "$srcdir/domake-git"
-	make doc
+	make domake.1.gz
 }
 
 check() {

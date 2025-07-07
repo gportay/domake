@@ -16,7 +16,7 @@ validpgpkeys=(8F3491E60E62695ED780AC672FA122CA0501CA71)
 
 build() {
 	cd "domake-$pkgver"
-	make doc
+	make domake.1.gz
 }
 
 check() {
