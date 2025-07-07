@@ -114,7 +114,7 @@ commit-check:
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
-	rm -f PKGBUILD.tmp *.tar.gz src/*.tar.gz *.pkg.tar.xz \
+	rm -f PKGBUILD.tmp *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/domake-*/ pkg/domake-*/ domake-git/
 	rm -Rf coverage/
 
