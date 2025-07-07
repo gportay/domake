@@ -60,7 +60,7 @@ user-%:
 
 .PHONY: ci
 ci: export EXIT_ON_ERROR = 1
-ci: check coverage
+ci: check tests
 
 .PHONY: test tests
 test tests:
@@ -69,10 +69,6 @@ test tests:
 .PHONY: check
 check: domake
 	shellcheck $^
-
-.PHONY: coverage
-coverage:
-	kcov $(CURDIR)/$@ --include-path=domake $(CURDIR)/tests.bash
 
 ifneq (,$(BUMP_VERSION))
 .SILENT: bump
@@ -120,7 +116,6 @@ clean:
 	rm -f domake.1.gz
 	rm -f PKGBUILD.tmp *.tar.gz src/*.tar.gz *.pkg.tar.xz \
 	   -R src/dosh-*/ pkg/domake-*/ domake-git/
-	rm -Rf coverage/
 
 .PHONY: updpkgsums
 updpkgsums:
