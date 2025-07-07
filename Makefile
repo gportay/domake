@@ -79,8 +79,9 @@ bump:
 	old="$$(bash domake --version)"; \
 	sed -e "/^VERSION=/s,$$old,$(BUMP_VERSION)," -i domake; \
 	sed -e "/^:man source:/s,$$old,$(BUMP_VERSION)," -i domake.1.adoc; \
+	sed -e "1idomake ($(BUMP_VERSION)) UNRELEASED; urgency=medium\n\n  * New release.\n\n -- $(shell git config user.name) <$(shell git config user.email)>  $(shell date --rfc-email)" -i debian/changelog; \
 	sed -e "/^pkgver=/s,$$old,$(BUMP_VERSION)," -e "/^pkgrel=/s,=.*,=1," -i PKGBUILD
-	git commit --gpg-sign domake domake.1.adoc PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
+	git commit --gpg-sign domake domake.1.adoc debian/changelog domake.spec PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
 	git tag --sign --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
 else
 .SILENT: bump-major
@@ -114,6 +115,9 @@ commit-check:
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
+	rm -f debian/files debian/*.substvars \
+	   -R debian/.debhelper/ debian/tmp/ \
+	      debian/domake/ debian/domake-docker-make/
 	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/domake-*/ pkg/domake-*/ domake-git/
 
@@ -122,6 +126,14 @@ clean:
 
 %.gz: %
 	gzip -c $< >$@
+
+.PHONY: deb
+deb: PATH:=$(CURDIR):$(PATH)
+deb: SHELL=dosh
+deb: export DOSH_DOCKERFILE=Dockerfile.deb
+deb:
+	dpkg-buildpackage -us -uc
+	lintian ../domake*.deb
 
 .PHONY: pkg
 pkg: PATH:=$(CURDIR):$(PATH)

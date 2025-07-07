@@ -1,0 +1,8 @@
+.debhelper/
+debhelper-build-stamp
+domake-docker-make.substvars
+domake-docker-make/
+domake.substvars
+domake/
+files
+tmp/

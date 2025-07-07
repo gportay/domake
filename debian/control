@@ -1,0 +1,19 @@
+Source: domake
+Maintainer: Gaël PORTAY <gael.portay@gmail.com>
+Section: utils
+Priority: optional
+Standards-Version: 4.6.2
+Build-Depends: debhelper-compat (= 13)
+
+Package: domake
+Architecture: all
+Depends: ${misc:Depends}
+Description: Maintain program dependencies running commands in container.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-docker-make
+Architecture: any
+Depends: ${misc:Depends}, domake
+Description: Docker CLI plugin for domake.
+ Maintain program dependencies running commands in container.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.
