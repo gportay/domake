@@ -1,5 +1,7 @@
 # Docker Make
 
+[![Packaging status](https://repology.org/badge/vertical-allrepos/domake.svg)](https://repology.org/project/domake/versions)
+
 ## TL;DR;
 
 [domake][domake(1)] is a bash script providing a make CLI to *docker-run(1)*.
@@ -26,7 +28,7 @@ container
 
 ## DOCUMENTATION
 
-Using *domake(1)* and _Makefile_
+Build the documentation using *domake(1)* and _Makefile_
 
 	$ domake doc
 	sha256:ced062433e33
@@ -57,7 +59,7 @@ Or
 
 ## LINKS
 
-Check for [man-pages](domake.1.adoc) and its [examples](domake.1.adoc#examples).
+Check for [man-pages][domake(1)] and its [examples].
 
 Enjoy!
 
@@ -82,4 +84,6 @@ the terms of the GNU Lesser General Public License as published by the Free
 Software Foundation, either version 2.1 of the License, or (at your option) any
 later version.
 
+[domake(1)]: domake.1.adoc
 [dosh(1)]: https://www.github.com/gportay/dosh/blob/master/dosh.1.adoc
+[examples]: domake.1.adoc#examples
