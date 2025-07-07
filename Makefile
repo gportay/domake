@@ -1,10 +1,11 @@
 #
-# Copyright 2017-2020,2023-2024 Gaël PORTAY
+# Copyright 2017-2020,2023-2025 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
 
 PREFIX ?= /usr/local
+VERSION ?= $(shell bash domake --version)
 
 .PHONY: all
 all:
@@ -80,6 +81,8 @@ bump:
 	sed -e "/^VERSION=/s,$$old,$(BUMP_VERSION)," -i domake; \
 	sed -e "/^:man source:/s,$$old,$(BUMP_VERSION)," -i domake.1.adoc; \
 	sed -e "1idomake ($(BUMP_VERSION)) UNRELEASED; urgency=medium\n\n  * New release.\n\n -- $(shell git config user.name) <$(shell git config user.email)>  $(shell date --rfc-email)" -i debian/changelog; \
+	sed -e "/^Version:/s,$$old,$(BUMP_VERSION)," -i domake.spec; \
+	sed -e "/%changelog/a* $(shell date "+%a %b %d %Y") $(shell git config user.name) <$(shell git config user.email)> - $(BUMP_VERSION)-1" -i domake.spec; \
 	sed -e "/^pkgver=/s,$$old,$(BUMP_VERSION)," -e "/^pkgrel=/s,=.*,=1," -i PKGBUILD
 	git commit --gpg-sign domake domake.1.adoc debian/changelog domake.spec PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
 	git tag --sign --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
@@ -120,6 +123,8 @@ clean:
 	      debian/domake/ debian/domake-docker-make/
 	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/domake-*/ pkg/domake-*/ domake-git/
+	rm -f rpmbuild/SOURCES/*.tar.gz rpmbuild/SPECS/*.spec \
+	      rpmbuild/SRPMS/*.rpm rpmbuild/RPMS/*/*.rpm
 
 %.1: %.1.adoc
 	asciidoctor -b manpage -o $@ $<
@@ -143,6 +148,18 @@ pkg:
 	makepkg --force --skipchecksums
 	shellcheck --shell=bash --exclude=SC2034,SC2154,SC2164 PKGBUILD*
 	namcap PKGBUILD* domake*.pkg.tar*
+
+.PHONY: rpm
+rpm: PATH:=$(CURDIR):$(PATH)
+rpm: SHELL=dosh
+rpm: export DOSH_DOCKERFILE=Dockerfile.rpm
+rpm:
+	rpmbuild --undefine=dist --undefine=_disable_source_fetch -ba domake.spec
+	rpmlint ~/rpmbuild/SPECS/domake.spec ~/rpmbuild/SRPMS/domake*.rpm ~/rpmbuild/RPMS/domake*.rpm
+
+rpmbuild/SOURCES/$(VERSION).tar.gz:
+rpmbuild/SOURCES/%.tar.gz:
+	git archive --prefix domake-$*/ --format tar.gz --output $@ HEAD
 
 domake-$(VERSION).tar.gz:
 %.tar.gz:

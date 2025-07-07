@@ -15,6 +15,11 @@ Dockerfile.pkg) DOSHELL=/bin/bash
 Dockerfile.deb) DOSHELL=/bin/bash
                 home=1
                 ;;
+Dockerfile.rpm) DOSHELL=/bin/bash
+                DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/rpmbuild:$HOME/rpmbuild")
+                DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/domake.spec:$HOME/rpmbuild/SPECS/domake.spec")
+                working_directory="$HOME/rpmbuild/SPECS"
+                ;;
 esac
 
 # Uncomment to use the same shell interpreter in container than the one which
