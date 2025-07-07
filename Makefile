@@ -138,3 +138,15 @@ PKGBUILD.tmp: PKGBUILD-git
 %.gz: %
 	gzip -c $< >$@
 
+.PHONY: pkg
+pkg: PATH:=$(CURDIR):$(PATH)
+pkg: SHELL=dosh
+pkg: export DOSH_DOCKERFILE=Dockerfile.pkg
+pkg:
+	makepkg --force --skipchecksums
+	shellcheck --shell=bash --exclude=SC2034,SC2154,SC2164 PKGBUILD*
+	namcap PKGBUILD* domake*.pkg.tar*
+
+domake-$(VERSION).tar.gz:
+%.tar.gz:
+	git archive --prefix $*/ --format tar.gz --output $@ HEAD
