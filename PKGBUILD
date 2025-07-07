@@ -4,15 +4,15 @@ pkgname=domake
 pkgver=1
 pkgrel=1
 pkgdesc='Docker make'
-arch=('any')
+arch=(any)
 url="https://github.com/gportay/$pkgname"
-license=('LGPL-2.1-or-later')
-depends=('bash')
-makedepends=('asciidoctor' 'bash-completion')
-checkdepends=('shellcheck')
+license=(LGPL-2.1-or-later)
+depends=(bash)
+makedepends=(asciidoctor bash-completion)
+checkdepends=(shellcheck)
 source=("$pkgname-$pkgver.tar.gz::https://github.com/gportay/$pkgname/archive/$pkgver.tar.gz")
-sha256sums=('bc93dc89527e52d25f6533924e24a961787e6efbd7305ea92615458f5e3fe30e')
-validpgpkeys=('8F3491E60E62695ED780AC672FA122CA0501CA71')
+sha256sums=(bc93dc89527e52d25f6533924e24a961787e6efbd7305ea92615458f5e3fe30e)
+validpgpkeys=(8F3491E60E62695ED780AC672FA122CA0501CA71)
 
 build() {
 	cd "$pkgname-$pkgver"
@@ -25,7 +25,7 @@ check() {
 }
 
 package() {
-	depends=('dosh')
+	depends=(dosh)
 
 	cd "$pkgname-$pkgver"
 	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc install-bash-completion
