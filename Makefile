@@ -115,7 +115,7 @@ commit-check:
 clean:
 	rm -f domake.1.gz
 	rm -f PKGBUILD.tmp *.tar.gz src/*.tar.gz *.pkg.tar.xz \
-	   -R src/dosh-*/ pkg/domake-*/ domake-git/
+	   -R src/domake-*/ pkg/domake-*/ domake-git/
 	rm -Rf coverage/
 
 .PHONY: updpkgsums
