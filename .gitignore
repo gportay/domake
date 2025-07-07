@@ -1,1 +1,5 @@
+*.pkg.tar*
+*.tar.gz
 domake.1.gz
+pkg/
+src/
