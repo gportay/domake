@@ -7,6 +7,7 @@ pkgdesc='Docker make'
 arch=('any')
 url="https://github.com/gportay/$pkgname"
 license=('LGPL-2.1-or-later')
+depends=('bash')
 makedepends=('asciidoctor' 'bash-completion')
 checkdepends=('shellcheck')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/gportay/$pkgname/archive/$pkgver.tar.gz")
