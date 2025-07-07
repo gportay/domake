@@ -7,7 +7,6 @@ pkgdesc='Docker make'
 arch=('any')
 url="https://github.com/gportay/$pkgname"
 license=('LGPL')
-depends=('dosh')
 makedepends=('asciidoctor')
 checkdepends=('shellcheck')
 source=("https://github.com/gportay/$pkgname/archive/$pkgver.tar.gz")
@@ -25,6 +24,8 @@ check() {
 }
 
 package() {
+	depends=('dosh')
+
 	cd "$pkgname-$pkgver"
 	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc install-bash-completion
 	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
