@@ -114,23 +114,8 @@ commit-check:
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
-	rm -f PKGBUILD.tmp *.tar.gz src/*.tar.gz *.pkg.tar* \
+	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/domake-*/ pkg/domake-*/ domake-git/
-
-.PHONY: updpkgsums
-updpkgsums:
-	updpkgsums
-
-.PHONY: aur
-aur:
-	makepkg --force --syncdeps
-
-.PHONY: aur-git
-aur-git: PKGBUILD.tmp
-	makepkg --force --syncdeps -p $^
-
-PKGBUILD.tmp: PKGBUILD-git
-	cp $< $@
 
 %.1: %.1.adoc
 	asciidoctor -b manpage -o $@ $<
