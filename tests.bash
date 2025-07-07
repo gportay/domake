@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2017-2020,2023-2024 Gaël PORTAY
+# Copyright 2017-2020,2023-2025 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
@@ -86,6 +86,7 @@ PATH="$PWD:$PATH"
 trap result 0 SIGINT
 
 export -n DOSH_DOCKER
+export -n DOSH_DOCKER_HOST
 export -n DOSHELL
 export -n DOSH_DOCKERFILE
 export -n DOSH_DOCKER_BUILD_EXTRA_OPTS
@@ -98,6 +99,20 @@ no_doshrc=1
 
 export no_doshprofile
 export no_doshrc
+
+docker=(docker)
+if "${docker[@]}" info -f "{{println .SecurityOptions}}" | grep -q rootless
+then
+	DOSH_DOCKER_HOST="${DOCKER_HOST:-unix://$XDG_RUNTIME_DIR/docker.sock}"
+
+	export DOSH_DOCKER_HOST
+elif ! grep -q -w docker < <(groups)
+then
+	docker=(sudo "${docker[@]}")
+	sudo=1
+
+	export sudo
+fi
 
 run "Test option --help"
 if domake --help | \
@@ -212,7 +227,8 @@ echo
 run "Test \$DOSH_DOCKER environment variable"
 if echo -e "all:\n\t@echo SHELL=\$\$0" | \
    domake -f - --no-print-directory DOSH_DOCKER='echo docker' | tee /dev/stderr | \
-   grep -q "docker exec --user ${GROUPS[0]}:${GROUPS[0]} --workdir $PWD --env DOSHLVL=1 [0-9a-z]\{64\} /bin/sh -c echo SHELL=\$0"
+   grep -q "docker exec --user ${GROUPS[0]}:${GROUPS[0]} --env USER=$USER --env HOME=$HOME --workdir $PWD --env DOSHLVL=1 [0-9a-z]\{64\} /bin/sh -c echo SHELL=\$0"
+
 then
 	ok
 else
