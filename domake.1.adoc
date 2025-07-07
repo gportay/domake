@@ -79,7 +79,7 @@ Change to another _directory_ before doing anything else
 
 == PATCHES
 
-Sumbit patches at *https://github.com/gportay/domake/pulls*
+Submit patches at *https://github.com/gportay/domake/pulls*
 
 == BUGS
 

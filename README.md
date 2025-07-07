@@ -63,7 +63,7 @@ Enjoy!
 
 ## PATCHES
 
-Sumbit patches at *https://github.com/gportay/domake/pulls*
+Submit patches at *https://github.com/gportay/domake/pulls*
 
 ## BUGS
 
