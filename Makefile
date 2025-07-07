@@ -1,5 +1,5 @@
 #
-# Copyright 2017-2020,2023-2024 Gaël PORTAY
+# Copyright 2017-2020,2023-2025 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
@@ -45,8 +45,8 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
 	rm -f $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
 	completionsdir=$${BASHCOMPLETIONSDIR:-$$(pkg-config --define-variable=prefix=$(PREFIX) \
-	                             --variable=completionsdir \
-	                             bash-completion)}; \
+	                                                    --variable=completionsdir \
+	                                                    bash-completion)}; \
 	if [ -n "$$completionsdir" ]; then \
 		rm -f $(DESTDIR)$$completionsdir/domake; \
 	fi
