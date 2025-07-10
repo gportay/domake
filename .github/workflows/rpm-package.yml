@@ -26,7 +26,7 @@ jobs:
         # FIXME: E: incorrect-fsf-address /usr/share/licenses/domake/LICENSE
         mkdir -p ~/.config/rpmlint
         printf '{"suppress-tags": ["incorrect-fsf-address"]}\n' >~/.config/rpmlint/rpmlint.json
-        rpmlint ${{ github.event.repository.name }}.spec ${{ github.event.repository.name }}*.rpm
+        rpmlint --file ~/.config/rpmlint/rpmlint.json ${{ github.event.repository.name }}.spec ${{ github.event.repository.name }}*.rpm
     - name: Create release
       uses: softprops/action-gh-release@v2
       if: github.ref_type == 'tag'
