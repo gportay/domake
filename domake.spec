@@ -57,5 +57,5 @@ make check
 %{_libdir}/docker/cli-plugins/docker-make
 
 %changelog
-* Mon Jul 07 2025 Gaël PORTAY <gael.portay@gmail.com> - 1
+* Mon Jul 07 2025 Gaël PORTAY <gael.portay@gmail.com> - 1%{?dist}
 - Initial release.
