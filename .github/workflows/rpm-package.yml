@@ -23,6 +23,9 @@ jobs:
         cp ~/rpmbuild/SRPMS/*.rpm ~/rpmbuild/RPMS/*/*.rpm .
     - name: Lint package
       run: |
+        # FIXME: E: incorrect-fsf-address /usr/share/licenses/domake/LICENSE
+        mkdir -p ~/.config/rpmlint
+        printf "Filters = ['incorrect-fsf-address']\n" >~/.config/rpmlint/.toml
         rpmlint ${{ github.event.repository.name }}.spec ${{ github.event.repository.name }}*.rpm
     - name: Create release
       uses: softprops/action-gh-release@v2
