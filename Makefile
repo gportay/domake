@@ -107,10 +107,6 @@ bump-minor:
 bump: bump-major
 endif
 
-.PHONY: bump-PKGBUILD
-bump-PKGBUILD: updpkgsums
-	git commit PKGBUILD --patch --message "PKGBUILD: update release $$(bash domake --version) checksum"
-
 .PHONY: commit-check
 commit-check:
 	git rebase -i -x "$(MAKE) check && $(MAKE) tests"
