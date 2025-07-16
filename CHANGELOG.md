@@ -15,8 +15,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Rename `DOCKER` to `DOSH_DOCKER`.
 - Run `dosh --rm` and `DOSH_DOCKER` from dosh 4 on exit.
 
-### Fixed
-
 ## [1] - 2020-02-04
 
 Initial release.
