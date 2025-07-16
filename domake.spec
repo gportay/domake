@@ -1,5 +1,5 @@
 Name:           domake
-Version:        1
+Version:        2
 Release:        1%{?dist}
 Summary:        Maintain program dependencies running commands in container
 
@@ -57,5 +57,9 @@ make check
 %{_libdir}/docker/cli-plugins/docker-make
 
 %changelog
+* Wed Jul 16 2025 Gaël PORTAY <gael.portay@gmail.com> - 2-1
+- Rename DOCKER to DOSH_DOCKER.
+- Run dosh --rm and DOSH_DOCKER from dosh 4.
+- Fix argument variables containing whitespaces.
 * Mon Jul 07 2025 Gaël PORTAY <gael.portay@gmail.com> - 1-1
 - Initial release.

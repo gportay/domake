@@ -4,7 +4,7 @@
 :email: gael.portay@gmail.com
 :lang: en
 :man manual: Docker Make Manual
-:man source: domake 1
+:man source: domake 2
 
 == NAME
 
