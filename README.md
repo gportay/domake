@@ -1,5 +1,9 @@
 # Docker Make
 
+[![Deploy Arch Linux package to GitHub Release](https://github.com/gportay/domake/actions/workflows/pkg-package.yml/badge.svg)](https://github.com/gportay/domake/actions/workflows/pkg-package.yml)
+[![Deploy Debian package to GitHub Release](https://github.com/gportay/domake/actions/workflows/deb-package.yml/badge.svg)](https://github.com/gportay/domake/actions/workflows/deb-package.yml)
+[![Deploy RPM package to GitHub Release](https://github.com/gportay/domake/actions/workflows/rpm-package.yml/badge.svg)](https://github.com/gportay/domake/actions/workflows/rpm-package.yml)
+
 [![Packaging status](https://repology.org/badge/vertical-allrepos/domake.svg)](https://repology.org/project/domake/versions)
 
 ## TL;DR;
