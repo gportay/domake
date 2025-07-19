@@ -1,6 +1,6 @@
 Name:           domake
 Version:        2
-Release:        1%{?dist}
+Release:        1
 Summary:        Maintain program dependencies running commands in container
 
 License:        LGPL-2.1-or-later

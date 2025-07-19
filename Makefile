@@ -150,7 +150,7 @@ rpm: PATH:=$(CURDIR):$(PATH)
 rpm: SHELL=dosh
 rpm: export DOSH_DOCKERFILE=Dockerfile.rpm
 rpm:
-	rpmbuild --undefine=dist --undefine=_disable_source_fetch -ba domake.spec
+	rpmbuild --undefine=_disable_source_fetch -ba domake.spec
 	rpmlint ~/rpmbuild/SPECS/domake.spec ~/rpmbuild/SRPMS/domake*.rpm ~/rpmbuild/RPMS/domake*.rpm
 
 rpmbuild/SOURCES/$(VERSION).tar.gz:
