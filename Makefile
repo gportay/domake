@@ -10,6 +10,7 @@ VERSION ?= $(shell bash domake --version)
 .PHONY: all
 all:
 	@eval $$(cat /etc/os*release); echo $$NAME
+	@uname -m
 
 .PHONY: doc
 doc: domake.1.gz

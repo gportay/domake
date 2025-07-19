@@ -1,5 +1,5 @@
 #
-# Copyright 2017-2018,2023 Gaël PORTAY
+# Copyright 2017-2018,2023,2025 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
@@ -40,6 +40,10 @@ _domake()
 		_filedir
 		return
 		;;
+	--platform)
+		COMPREPLY=( $( compgen -W "linux/amd64 linux/arm/v6 linux/arm/v7 linux/arm64 linux/ppc64le linux/riscv64 linux/s390x" -- "$cur" ) )
+		return
+		;;
 	-C|--directory)
 		_filedir -d
 		return
@@ -52,8 +56,8 @@ _domake()
 	_command_offset 0
 
 	local short_opts="-C"
-	local long_opts="--dockerfile --directory --shell --version --help"
+	local long_opts="--dockerfile --platform --directory --shell --version --help"
 	COMPREPLY+=( $( compgen -W "$short_opts $long_opts" -- "$cur" ) )
 
 } &&
-complete -F _domake domake
+complete -F _domake domake linux-amd64-domake linux-armv6-domake linux-armv7-domake linux-arm64-domake linux-ppc64le-domake linux-riscv64-domake linux-s390x-domake

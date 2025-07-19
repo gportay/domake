@@ -19,6 +19,7 @@ For a more thorough description of make, please refers to its help.
 
 Options:
       --dockerfile FILE         Path to the Dockerfile to use.
+      --platform TARGET         Set target platform.
       -C or --directory DIR     Change to directory before doing anything else.
             --shell SHELL       Set shell interpretor.
                                 Equivalent to set DOSHELL=<SHELL>.
@@ -52,6 +53,10 @@ do
 	then
 		doshopts+=("--shell" "$2")
 		shell_doshopts+=("--shell" "$2")
+		shift
+	elif [ "$1" = "--platform" ]
+	then
+		doshopts+=("--platform" "$2")
 		shift
 	elif [[ "$1" =~ ^DOSHELL=.* ]]
 	then

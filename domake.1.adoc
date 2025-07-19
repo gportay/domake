@@ -25,6 +25,9 @@ For a more thorough description of *make(1)*, please refers to its manual.
 **--dockerfile FILE**
 	Path to the Dockerfile to use.
 
+**--platform TARGET**::
+	Set target platform.
+
 **-C or --directory DIR**
 	Change to directory before doing anything else.
 
@@ -91,7 +94,7 @@ Written by Gaël PORTAY *gael.portay@gmail.com*
 
 == COPYRIGHT
 
-Copyright 2017-2018,2020,2024 Gaël PORTAY
+Copyright 2017-2018,2020,2024-2025 Gaël PORTAY
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free
