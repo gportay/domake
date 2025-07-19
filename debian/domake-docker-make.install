@@ -1,1 +1,1 @@
-usr/lib/${DEB_HOST_MULTIARCH}/docker/cli-plugins/docker-make usr/lib/${DEB_HOST_MULTIARCH}/docker/cli-plugins
+debian/tmp/usr/lib/${DEB_HOST_MULTIARCH}/docker/cli-plugins/docker-make usr/lib/${DEB_HOST_MULTIARCH}/docker/cli-plugins
