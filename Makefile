@@ -115,7 +115,7 @@ commit-check:
 .PHONY: clean
 clean:
 	rm -f domake.1.gz
-	rm -f debian/files debian/*.substvars \
+	rm -f debian/files debian/debhelper-build-stamp debian/*.substvars \
 	   -R debian/.debhelper/ debian/tmp/ \
 	      debian/domake/ debian/domake-docker-make/
 	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
