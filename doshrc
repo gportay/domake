@@ -17,7 +17,6 @@ Dockerfile.deb) DOSHELL=/bin/bash
 Dockerfile.rpm) DOSHELL=/bin/bash
                 DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/rpmbuild:$HOME/rpmbuild")
                 DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/domake.spec:$HOME/rpmbuild/SPECS/domake.spec")
-                working_directory="$HOME/rpmbuild/SPECS"
                 ;;
 esac
 
