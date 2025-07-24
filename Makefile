@@ -179,7 +179,8 @@ clean:
 	rm -f domake.1.gz
 	rm -f debian/files debian/debhelper-build-stamp debian/*.substvars \
 	   -R debian/.debhelper/ debian/tmp/ \
-	      debian/domake/ debian/domake-docker-make/
+	      debian/domake/ debian/domake-docker-make/ \
+	      debian/domake-linux-*/
 	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/domake-*/ pkg/domake-*/ domake-git/
 	rm -f rpmbuild/SOURCES/*.tar.gz rpmbuild/SPECS/*.spec \
