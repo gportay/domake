@@ -1,11 +1,11 @@
-domake (2) UNRELEASED; urgency=medium
+domake (2) unstable; urgency=medium
 
   * Rename DOCKER to DOSH_DOCKER.
   * Run dosh --rm and DOSH_DOCKER from dosh 4.
   * Fix argument variables containing whitespaces.
 
  -- Gaël PORTAY <gael.portay@gmail.com>  Wed, 16 Jul 2025 14:05:24 +0200
-domake (1) UNRELEASED; urgency=medium
+domake (1) unstable; urgency=medium
 
   * Initial release.
 
