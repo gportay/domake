@@ -86,7 +86,7 @@ bump:
 	sed -e "/%changelog/a* $(shell date "+%a %b %d %Y") $(shell git config user.name) <$(shell git config user.email)> - $(BUMP_VERSION)-1" -i domake.spec; \
 	sed -e "/^pkgver=/s,$$old,$(BUMP_VERSION)," -e "/^pkgrel=/s,=.*,=1," -i PKGBUILD; \
 	sed -e "/^sha256sums=/s,[[:xdigit:]]\{64\,64\},SKIP," -i PKGBUILD
-	git commit --gpg-sign domake domake.1.adoc debian/changelog domake.spec PKGBUILD --patch --message "domake: version $(BUMP_VERSION)"
+	git commit --gpg-sign domake domake.1.adoc debian/changelog domake.spec PKGBUILD --message "domake: version $(BUMP_VERSION)"
 	git tag --sign --annotate --message "domake-$(BUMP_VERSION)" "$(BUMP_VERSION)"
 else
 .SILENT: bump-major
