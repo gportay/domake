@@ -81,7 +81,7 @@ bump:
 	old="$$(bash domake --version)"; \
 	sed -e "/^VERSION=/s,$$old,$(BUMP_VERSION)," -i domake; \
 	sed -e "/^:man source:/s,$$old,$(BUMP_VERSION)," -i domake.1.adoc; \
-	sed -e "1idomake ($(BUMP_VERSION)) UNRELEASED; urgency=medium\n\n  * New release.\n\n -- $(shell git config user.name) <$(shell git config user.email)>  $(shell date --rfc-email)" -i debian/changelog; \
+	sed -e "1idomake ($(BUMP_VERSION)) unstable; urgency=medium\n\n  * New release.\n\n -- $(shell git config user.name) <$(shell git config user.email)>  $(shell date --rfc-email)" -i debian/changelog; \
 	sed -e "/^Version:/s,$$old,$(BUMP_VERSION)," -i domake.spec; \
 	sed -e "/%changelog/a* $(shell date "+%a %b %d %Y") $(shell git config user.name) <$(shell git config user.email)> - $(BUMP_VERSION)-1" -i domake.spec; \
 	sed -e "/^pkgver=/s,$$old,$(BUMP_VERSION)," -e "/^pkgrel=/s,=.*,=1," -i PKGBUILD
