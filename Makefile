@@ -14,6 +14,17 @@ all:
 .PHONY: doc
 doc: domake.1.gz
 
+.PHONY: install-world
+install-world: install-all
+install-world: install-linux-amd64-domake
+install-world: install-linux-arm64-domake
+install-world: install-linux-arm-domake
+install-world: install-linux-arm-v6-domake
+install-world: install-linux-arm-v7-domake
+install-world: install-linux-ppc64le-domake
+install-world: install-linux-riscv64-domake
+install-world: install-linux-s390x-domake
+
 .PHONY: install-all
 install-all: install
 install-all: install-doc
@@ -42,6 +53,19 @@ install-docker-cli-plugin: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
 install-docker-cli-plugin:
 	install -D -m 755 support/docker-make $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
 
+install-linux-amd64-domake:
+install-linux-arm64-domake:
+install-linux-arm-domake:
+install-linux-arm-v6-domake:
+install-linux-arm-v7-domake:
+install-linux-ppc64le-domake:
+install-linux-riscv64-domake:
+install-linux-s390x-domake:
+install-linux-%-domake:
+	install -d $(DESTDIR)$(PREFIX)/bin
+	ln -sf domake $(DESTDIR)$(PREFIX)/bin/linux-$*-domake
+
+
 .PHONY: uninstall
 uninstall: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
 uninstall:
@@ -54,6 +78,25 @@ uninstall:
 	if [ -n "$$completionsdir" ]; then \
 		rm -f $(DESTDIR)$$completionsdir/domake; \
 	fi
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-amd64-domake
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm64-domake
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm-domake
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm-v6-domake
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm-v7-domake
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-ppc64le-domake
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-riscv64-domake
+	rm -f $(DESTDIR)$(PREFIX)/bin/linux-s390x-domake
+
+.PHONY: user-install-world
+user-install-world: user-install-all
+user-install-world: user-install-linux-amd64-domake
+user-install-world: user-install-linux-arm64-domake
+user-install-world: user-install-linux-arm-domake
+user-install-world: user-install-linux-arm-v6-domake
+user-install-world: user-install-linux-arm-v7-domake
+user-install-world: user-install-linux-ppc64le-domake
+user-install-world: user-install-linux-riscv64-domake
+user-install-world: user-install-linux-s390x-domake
 
 .PHONY: user-install-all
 user-install-all: user-install
@@ -65,6 +108,14 @@ user-install:
 user-install-doc:
 user-install-bash-completion:
 user-install-docker-cli-plugin:
+user-install-linux-amd64-domake:
+user-install-linux-arm64-domake:
+user-install-linux-arm-domake:
+user-install-linux-arm-v6-domake:
+user-install-linux-arm-v7-domake:
+user-install-linux-ppc64le-domake:
+user-install-linux-riscv64-domake:
+user-install-linux-s390x-domake:
 user-uninstall:
 user-%:
 	$(MAKE) $* PREFIX=$$HOME/.local BASHCOMPLETIONSDIR=$$HOME/.local/share/bash-completion/completions DOCKERLIBDIR=$$HOME/.docker
