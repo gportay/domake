@@ -49,8 +49,8 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
 	rm -f $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
 	completionsdir=$${BASHCOMPLETIONSDIR:-$$(pkg-config --define-variable=prefix=$(PREFIX) \
-	                             --variable=completionsdir \
-	                             bash-completion)}; \
+	                                                    --variable=completionsdir \
+	                                                    bash-completion)}; \
 	if [ -n "$$completionsdir" ]; then \
 		rm -f $(DESTDIR)$$completionsdir/domake; \
 	fi
