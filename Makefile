@@ -18,7 +18,7 @@ doc: domake.1.gz
 install-all: install
 install-all: install-doc
 install-all: install-bash-completion
-install-all: install-cli-plugin
+install-all: install-docker-cli-plugin
 
 .PHONY: install
 install:
@@ -37,9 +37,9 @@ install-bash-completion:
 		install -D -m 644 bash-completion $(DESTDIR)$$completionsdir/domake; \
 	fi
 
-.PHONY: install-cli-plugin
-install-cli-plugin: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
-install-cli-plugin:
+.PHONY: install-docker-cli-plugin
+install-docker-cli-plugin: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
+install-docker-cli-plugin:
 	install -D -m 755 support/docker-make $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
 
 .PHONY: uninstall
@@ -59,12 +59,12 @@ uninstall:
 user-install-all: user-install
 user-install-all: user-install-doc
 user-install-all: user-install-bash-completion
-user-install-all: user-install-cli-plugin
+user-install-all: user-install-docker-cli-plugin
 
 user-install:
 user-install-doc:
 user-install-bash-completion:
-user-install-cli-plugin:
+user-install-docker-cli-plugin:
 user-uninstall:
 user-%:
 	$(MAKE) $* PREFIX=$$HOME/.local BASHCOMPLETIONSDIR=$$HOME/.local/share/bash-completion/completions DOCKERLIBDIR=$$HOME/.docker
