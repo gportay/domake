@@ -87,6 +87,7 @@ trap result 0 SIGINT
 
 export -n DOSH_DOCKER
 export -n DOSH_DOCKER_HOST
+export -n DOSH_PLATFORM
 export -n DOSHELL
 export -n DOSH_DOCKERFILE
 export -n DOSH_DOCKER_BUILD_EXTRA_OPTS

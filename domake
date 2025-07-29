@@ -12,7 +12,7 @@ target="${target%-domake}"
 if [ "$target" != "domake" ] && [ ! "${DOSH_PLATFORM:-}" ]
 then
 	target="${target//-/\/}"
-	DOSH_PLATFORM="$target"
+	export DOSH_PLATFORM="$target"
 fi
 
 VERSION="2"
@@ -38,6 +38,9 @@ Environment variables:
       DOSHELL                   The full pathname to the shell to run in docker
                                 image.
                                 Equivalent to --shell <SHELL>.
+
+      DOSH_PLATFORM             The target platform to use.
+                                Equivalent to --platform <TARGET>.
 
       DOSHELL_DOCKER            The docker executable.
 EOF
@@ -67,6 +70,10 @@ do
 		doshopts+=("--platform" "$2")
 		shift
 	elif [[ "$1" =~ ^DOSHELL=.* ]]
+	then
+		[[ "$1" =~ ^([^=]+)=(.*) ]]
+		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
+	elif [[ "$1" =~ ^DOSH_PLATFORM=.* ]]
 	then
 		[[ "$1" =~ ^([^=]+)=(.*) ]]
 		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
