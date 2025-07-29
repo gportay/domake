@@ -1,6 +1,7 @@
 # Maintainer: Gaël PORTAY <gael.portay@gmail.com>
 
-pkgname=(domake domake-docker-make)
+pkgname=(domake
+	 domake-docker-make)
 pkgver=2
 pkgrel=1
 pkgdesc='Docker make'

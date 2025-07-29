@@ -16,7 +16,10 @@ all:
 doc: domake.1.gz
 
 .PHONY: install-all
-install-all: install install-doc install-bash-completion install-cli-plugin
+install-all: install
+install-all: install-doc
+install-all: install-bash-completion
+install-all: install-cli-plugin
 
 .PHONY: install
 install:
@@ -54,9 +57,16 @@ uninstall:
 	fi
 
 .PHONY: user-install-all
-user-install-all: user-install user-install-doc user-install-bash-completion user-install-cli-plugin
+user-install-all: user-install
+user-install-all: user-install-doc
+user-install-all: user-install-bash-completion
+user-install-all: user-install-cli-plugin
 
-user-install user-install-doc user-install-bash-completion user-install-cli-plugin user-uninstall:
+user-install:
+user-install-doc:
+user-install-bash-completion:
+user-install-cli-plugin:
+user-uninstall:
 user-%:
 	$(MAKE) $* PREFIX=$$HOME/.local BASHCOMPLETIONSDIR=$$HOME/.local/share/bash-completion/completions DOCKERLIBDIR=$$HOME/.docker
 
