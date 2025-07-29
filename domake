@@ -7,6 +7,14 @@
 
 set -e
 
+target="${0##*/}"
+target="${target%-domake}"
+if [ "$target" != "domake" ] && [ ! "${DOSH_PLATFORM:-}" ]
+then
+	target="${target//-/\/}"
+	DOSH_PLATFORM="$target"
+fi
+
 VERSION="2"
 
 usage() {
