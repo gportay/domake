@@ -167,7 +167,7 @@ rpm:
 	rpmlint ~/rpmbuild/SPECS/domake.spec ~/rpmbuild/SRPMS/domake*.rpm ~/rpmbuild/RPMS/domake*.rpm
 
 .PHONY: sources
-sources: domake-$(VERSION).tar.gz rpmbuild/SOURCES/v$(VERSION).tar.gz
+sources: domake-$(VERSION).tar.gz rpmbuild/SOURCES/$(VERSION).tar.gz
 
 rpmbuild/SOURCES/$(VERSION).tar.gz:
 rpmbuild/SOURCES/%.tar.gz:
