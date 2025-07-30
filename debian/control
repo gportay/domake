@@ -17,3 +17,39 @@ Depends: ${misc:Depends}, domake
 Description: Docker CLI plugin for domake.
  Maintain program dependencies running commands in container.
  domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-linux-amd64
+Architecture: all
+Depends: ${misc:Depends}, dosh
+Description: Docker make for linux/amd64 platform.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-linux-arm64
+Architecture: all
+Depends: ${misc:Depends}, dosh
+Description: Docker make for linux/arm64 platform.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-linux-arm
+Architecture: all
+Depends: ${misc:Depends}, dosh
+Description: Docker make for linux/arm platform.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-linux-ppc64le
+Architecture: all
+Depends: ${misc:Depends}, dosh
+Description: Docker make for linux/ppc64le platform.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-linux-riscv64
+Architecture: all
+Depends: ${misc:Depends}, dosh
+Description: Docker make for linux/riscv64 platform.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-linux-s390x
+Architecture: all
+Depends: ${misc:Depends}, dosh
+Description: Docker make for linux/s390x platform.
+ domake(1) runs on top of make(1) using dosh(1) as default shell.

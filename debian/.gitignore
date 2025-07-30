@@ -4,5 +4,7 @@ domake-docker-make.substvars
 domake-docker-make/
 domake.substvars
 domake/
+domake-linux-*.substvars
+domake-linux-*/
 files
 tmp/
