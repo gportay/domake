@@ -228,7 +228,7 @@ echo
 run "Test \$DOSH_DOCKER environment variable"
 if echo -e "all:\n\t@echo SHELL=\$\$0" | \
    domake -f - --no-print-directory DOSH_DOCKER='echo docker' | tee /dev/stderr | \
-   grep -q "docker exec --user ${GROUPS[0]}:${GROUPS[0]} --env USER=$USER --env HOME=$HOME --workdir $PWD --env DOSHLVL=1 [0-9a-z]\{64\} /bin/sh -c echo SHELL=\$0"
+   grep -q "docker exec --user $UID:${GROUPS[0]} --env USER=$USER --env HOME=$HOME --workdir $PWD --env DOSHLVL=1 [0-9a-z]\{64\} /bin/sh -c echo SHELL=\$0"
 then
 	ok
 else
