@@ -51,7 +51,7 @@ For a more thorough description of *make(1)*, please refers to its manual.
 	The target platform to use.
 	Equivalent to --platform <TARGET>.
 
-**DOSH_DOCKER**::
+**DOSHELL_DOCKER**::
 	The docker executable.
 
 == EXAMPLES
