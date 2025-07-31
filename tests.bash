@@ -192,7 +192,7 @@ else
 fi
 echo
 
-run "Test overriding existent \$DOSHELL with a busybox based distro (/bin/ash)"
+run "Test overriding existent DOSHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
      DOSHELL=/bin/ash domake -f - --dockerfile Dockerfile.alpine | tee /dev/stderr | \
      grep 'SHELL=/bin/ash' >/dev/null )
@@ -203,7 +203,7 @@ else
 fi
 echo
 
-run "Test overriding nonexistent \$DOSHELL and option --shell SHELL with a busybox based distro (/bin/ash)"
+run "Test overriding nonexistent DOSHELL and option --shell SHELL with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
      DOSHELL=/bin/zsh domake -f - --dockerfile Dockerfile.alpine --shell /bin/sh | tee /dev/stderr | \
      grep 'SHELL=/bin/sh' >/dev/null )
@@ -214,7 +214,7 @@ else
 fi
 echo
 
-run "Test overriding existent \$DOSHELL in command line argument with a busybox based distro (/bin/ash)"
+run "Test overriding existent DOSHELL in command line argument with a busybox based distro (/bin/ash)"
 if ( echo -e "all:\n\t@echo SHELL=\$\$0" | \
      domake -f - --dockerfile Dockerfile.alpine DOSHELL=/bin/ash | tee /dev/stderr | \
      grep 'SHELL=/bin/ash' >/dev/null )
@@ -225,7 +225,7 @@ else
 fi
 echo
 
-run "Test \$DOSH_DOCKER environment variable"
+run "Test DOSH_DOCKER environment variable"
 if echo -e "all:\n\t@echo SHELL=\$\$0" | \
    domake -f - --no-print-directory DOSH_DOCKER='echo docker' | tee /dev/stderr | \
    grep -q "docker exec --user $UID:${GROUPS[0]} --env USER=$USER --env HOME=$HOME --workdir $PWD --env DOSHLVL=1 .\+ /bin/sh -c echo SHELL=\$0"
