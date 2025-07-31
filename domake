@@ -33,16 +33,6 @@ Options:
                                 Equivalent to set DOSHELL=<SHELL>.
       --version                 Print version.
       --help                    Print usage.
-
-Environment variables:
-      DOSHELL                   The full pathname to the shell to run in docker
-                                image.
-                                Equivalent to --shell <SHELL>.
-
-      DOSH_PLATFORM             The target platform to use.
-                                Equivalent to --platform <TARGET>.
-
-      DOSH_DOCKER               The docker executable.
 EOF
 }
 
@@ -69,18 +59,6 @@ do
 	then
 		doshopts+=("--platform" "$2")
 		shift
-	elif [[ "$1" =~ ^DOSHELL=.* ]]
-	then
-		[[ "$1" =~ ^([^=]+)=(.*) ]]
-		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
-	elif [[ "$1" =~ ^DOSH_PLATFORM=.* ]]
-	then
-		[[ "$1" =~ ^([^=]+)=(.*) ]]
-		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
-	elif [[ "$1" =~ ^DOSH_DOCKER=.* ]]
-	then
-		[[ "$1" =~ ^([^=]+)=(.*) ]]
-		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
 	elif [ "$1" = "--dockerfile" ]
 	then
 		doshopts+=("--dockerfile" "$2")
