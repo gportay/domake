@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add --platform option and `DOSH_PLATFORM` environment to support
   [multi-platform].
 
+### Fixed
+
+- Fix rename `DOCKER` to `DOSH_DOCKER`.
+
 ## [2] - 2025-07-16
 
 ### Added

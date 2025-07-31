@@ -42,7 +42,7 @@ Environment variables:
       DOSH_PLATFORM             The target platform to use.
                                 Equivalent to --platform <TARGET>.
 
-      DOSHELL_DOCKER            The docker executable.
+      DOSH_DOCKER               The docker executable.
 EOF
 }
 
@@ -77,7 +77,7 @@ do
 	then
 		[[ "$1" =~ ^([^=]+)=(.*) ]]
 		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
-	elif [[ "$1" =~ ^DOSHELL_DOCKER=.* ]]
+	elif [[ "$1" =~ ^DOSH_DOCKER=.* ]]
 	then
 		[[ "$1" =~ ^([^=]+)=(.*) ]]
 		eval export "${BASH_REMATCH[1]}=\"${BASH_REMATCH[2]}\""
@@ -102,4 +102,4 @@ trap 'dosh --rm "$container" --force' 0
 
 # Run make and set docker shell as default shell
 set -- "${makeopts[@]}"
-make SHELL="dosh ${shell_doshopts[*]} --exec $container" "$@"
+make SHELL="dosh ${shell_doshopts[*]} --exec '$container'" "$@"
