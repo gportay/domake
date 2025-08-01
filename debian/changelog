@@ -1,3 +1,8 @@
+domake (3) unstable; urgency=medium
+
+  * Add --platform option to support multi-platform.
+
+ -- Gaël PORTAY <gael.portay@gmail.com>  Fri, 01 Aug 2025 20:48:37 +0200
 domake (2) unstable; urgency=medium
 
   * Rename DOCKER to DOSH_DOCKER.

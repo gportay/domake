@@ -8,7 +8,7 @@ pkgname=(domake
 	 domake-linux-ppc64le
 	 domake-linux-riscv64
 	 domake-linux-s390x)
-pkgver=2
+pkgver=3
 pkgrel=1
 pkgdesc='Docker make'
 arch=(any)
@@ -18,7 +18,7 @@ depends=(bash)
 makedepends=(asciidoctor bash-completion)
 checkdepends=(shellcheck)
 source=("domake-$pkgver.tar.gz::https://github.com/gportay/domake/archive/$pkgver.tar.gz")
-sha256sums=(bc93dc89527e52d25f6533924e24a961787e6efbd7305ea92615458f5e3fe30e)
+sha256sums=(SKIP)
 validpgpkeys=(8F3491E60E62695ED780AC672FA122CA0501CA71)
 
 build() {

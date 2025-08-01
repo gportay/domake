@@ -1,5 +1,5 @@
 Name:           domake
-Version:        2
+Version:        3
 Release:        1
 Summary:        Maintain program dependencies running commands in container
 
@@ -131,6 +131,8 @@ make check
 %{_libdir}/docker/cli-plugins/docker-make
 
 %changelog
+* Fri Aug 01 2025 Gaël PORTAY <gael.portay@gmail.com> - 3-1
+- Add --platform option to support multi-platform.
 * Wed Jul 16 2025 Gaël PORTAY <gael.portay@gmail.com> - 2-1
 - Rename DOCKER to DOSH_DOCKER.
 - Run dosh --rm and DOSH_DOCKER from dosh 4.
