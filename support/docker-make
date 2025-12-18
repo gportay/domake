@@ -52,7 +52,7 @@ domake, please refers to its help.
 Options:
   --dockerfile string      Path to the Dockerfile to use.
   --platform string        Set target platform.
-  -C or --directory string Change to directory before doing anything else.
+  -C, --directory string   Change to directory before doing anything else.
   --shell string           Set shell interpretor.
   --version                Print version.
   --help                   Print usage.
