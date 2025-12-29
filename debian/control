@@ -18,38 +18,64 @@ Description: Docker CLI plugin for domake.
  Maintain program dependencies running commands in container.
  domake(1) runs on top of make(1) using dosh(1) as default shell.
 
-Package: domake-linux-amd64
+Package: domake-linux-platforms
 Architecture: all
 Depends: ${misc:Depends}, domake
-Description: Docker make for linux/amd64 platform.
+Replaces:
+ domake-linux-amd64 (<< 4),
+ domake-linux-arm64 (<< 4),
+ domake-linux-arm (<< 4),
+ domake-linux-ppc64le (<< 4),
+ domake-linux-riscv64 (<< 4),
+ domake-linux-s390x (<< 4),
+Breaks:
+ domake-linux-amd64 (<< 4),
+ domake-linux-arm64 (<< 4),
+ domake-linux-arm (<< 4),
+ domake-linux-ppc64le (<< 4),
+ domake-linux-riscv64 (<< 4),
+ domake-linux-s390x (<< 4),
+Description: Docker make for linux platforms.
  domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+Package: domake-linux-amd64
+Architecture: all
+Section: oldlibs
+Depends: ${misc:Depends}, domake-linux-platforms
+Description: Docker make for linux/amd64 platform.
+ This is a transitional package. It can safely be removed.
 
 Package: domake-linux-arm64
 Architecture: all
-Depends: ${misc:Depends}, domake
+Section: oldlibs
+Depends: ${misc:Depends}, domake-linux-platforms
 Description: Docker make for linux/arm64 platform.
- domake(1) runs on top of make(1) using dosh(1) as default shell.
+ This is a transitional package. It can safely be removed.
 
 Package: domake-linux-arm
 Architecture: all
-Depends: ${misc:Depends}, domake
+Section: oldlibs
+Depends: ${misc:Depends}, domake-linux-platforms
 Description: Docker make for linux/arm platform.
- domake(1) runs on top of make(1) using dosh(1) as default shell.
+ This is a transitional package. It can safely be removed.
 
 Package: domake-linux-ppc64le
 Architecture: all
-Depends: ${misc:Depends}, domake
+Section: oldlibs
+Depends: ${misc:Depends}, domake-linux-platforms
 Description: Docker make for linux/ppc64le platform.
- domake(1) runs on top of make(1) using dosh(1) as default shell.
+ This is a transitional package. It can safely be removed.
 
 Package: domake-linux-riscv64
 Architecture: all
-Depends: ${misc:Depends}, domake
+Section: oldlibs
+Depends: ${misc:Depends}, domake-linux-platforms
 Description: Docker make for linux/riscv64 platform.
- domake(1) runs on top of make(1) using dosh(1) as default shell.
+ This is a transitional package. It can safely be removed.
 
 Package: domake-linux-s390x
 Architecture: all
-Depends: ${misc:Depends}, domake
+Section: oldlibs
+Depends: ${misc:Depends}, domake-linux-platforms
 Description: Docker make for linux/s390x platform.
- domake(1) runs on top of make(1) using dosh(1) as default shell.
+ This is a transitional package. It can safely be removed.

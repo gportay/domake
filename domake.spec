@@ -21,6 +21,14 @@ domake(1) runs on top of make(1) using dosh(1) as default shell.
 
 %global debug_package %{nil}
 
+%package  linux-platforms
+Requires: dosh
+Summary:  Docker make for linux platforms
+
+%description linux-platforms
+domake(1) runs on top of make(1) using dosh(1) as default shell.
+
+
 %package  linux-amd64
 Requires: dosh
 Summary:  Docker make for linux/amd64 platform
@@ -112,29 +120,14 @@ rm -f "$_libdir/docker/cli-plugins/docker-make"
 %{_datadir}/man/man1/domake.1.gz
 
 
-%files linux-amd64
+%files linux-platforms
 %{_bindir}/linux-amd64-domake
-
-
-%files linux-arm64
 %{_bindir}/linux-arm64-domake
-
-
-%files linux-arm
 %{_bindir}/linux-arm-domake
 %{_bindir}/linux-arm-v6-domake
 %{_bindir}/linux-arm-v7-domake
-
-
-%files linux-ppc64le
 %{_bindir}/linux-ppc64le-domake
-
-
-%files linux-riscv64
 %{_bindir}/linux-riscv64-domake
-
-
-%files linux-s390x
 %{_bindir}/linux-s390x-domake
 
 
