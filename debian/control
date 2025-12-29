@@ -13,13 +13,6 @@ Breaks: domake-docker-make (<< 4)
 Description: Maintain program dependencies running commands in container.
  domake(1) runs on top of make(1) using dosh(1) as default shell.
 
-Package: domake-docker-make
-Architecture: all
-Section: oldlibs
-Depends: ${misc:Depends}, domake (>= 4)
-Description: Docker CLI plugin for domake.
- This is a transitional package. It can safely be removed.
-
 Package: domake-linux-platforms
 Architecture: all
 Depends: ${misc:Depends}, domake
@@ -39,45 +32,3 @@ Breaks:
  domake-linux-s390x (<< 4),
 Description: Docker make for linux platforms.
  domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-Package: domake-linux-amd64
-Architecture: all
-Section: oldlibs
-Depends: ${misc:Depends}, domake-linux-platforms
-Description: Docker make for linux/amd64 platform.
- This is a transitional package. It can safely be removed.
-
-Package: domake-linux-arm64
-Architecture: all
-Section: oldlibs
-Depends: ${misc:Depends}, domake-linux-platforms
-Description: Docker make for linux/arm64 platform.
- This is a transitional package. It can safely be removed.
-
-Package: domake-linux-arm
-Architecture: all
-Section: oldlibs
-Depends: ${misc:Depends}, domake-linux-platforms
-Description: Docker make for linux/arm platform.
- This is a transitional package. It can safely be removed.
-
-Package: domake-linux-ppc64le
-Architecture: all
-Section: oldlibs
-Depends: ${misc:Depends}, domake-linux-platforms
-Description: Docker make for linux/ppc64le platform.
- This is a transitional package. It can safely be removed.
-
-Package: domake-linux-riscv64
-Architecture: all
-Section: oldlibs
-Depends: ${misc:Depends}, domake-linux-platforms
-Description: Docker make for linux/riscv64 platform.
- This is a transitional package. It can safely be removed.
-
-Package: domake-linux-s390x
-Architecture: all
-Section: oldlibs
-Depends: ${misc:Depends}, domake-linux-platforms
-Description: Docker make for linux/s390x platform.
- This is a transitional package. It can safely be removed.

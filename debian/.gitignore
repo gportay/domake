@@ -1,10 +1,8 @@
 .debhelper/
 debhelper-build-stamp
-domake-docker-make.substvars
-domake-docker-make/
 domake.substvars
 domake/
-domake-linux-*.substvars
-domake-linux-*/
+domake-linux-platforms.substvars
+domake-linux-platforms/
 files
 tmp/
