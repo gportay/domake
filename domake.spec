@@ -29,54 +29,6 @@ Summary:  Docker make for linux platforms
 domake(1) runs on top of make(1) using dosh(1) as default shell.
 
 
-%package  linux-amd64
-Requires: dosh
-Summary:  Docker make for linux/amd64 platform
-
-%description linux-amd64
-domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-
-%package  linux-arm64
-Requires: dosh
-Summary:  Docker make for linux/arm64 platform
-
-%description linux-arm64
-domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-
-%package  linux-arm
-Requires: dosh
-Summary:  Docker make for linux/arm platform
-
-%description linux-arm
-domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-
-%package  linux-ppc64le
-Requires: dosh
-Summary:  Docker make for linux/ppc64le platform
-
-%description linux-ppc64le
-domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-
-%package  linux-riscv64
-Requires: dosh
-Summary:  Docker make for linux/riscv64 platform
-
-%description linux-riscv64
-domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-
-%package  linux-s390x
-Requires: dosh
-Summary:  Docker make for linux/s390x platform
-
-%description linux-s390x
-domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-
 %prep
 %setup -q
 
