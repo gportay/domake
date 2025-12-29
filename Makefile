@@ -53,6 +53,17 @@ install-docker-cli-plugin: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
 install-docker-cli-plugin:
 	install -D -m 755 support/docker-make $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
 
+.PHONY: install-linux-platforms
+install-linux-platforms: install-linux-amd64-domake
+install-linux-platforms: install-linux-arm64-domake
+install-linux-platforms: install-linux-arm-domake
+install-linux-platforms: install-linux-arm-v6-domake
+install-linux-platforms: install-linux-arm-v7-domake
+install-linux-platforms: install-linux-ppc64le-domake
+install-linux-platforms: install-linux-riscv64-domake
+install-linux-platforms: install-linux-s390x-domake
+install-linux-platforms:
+
 install-linux-amd64-domake:
 install-linux-arm64-domake:
 install-linux-arm-domake:
@@ -108,6 +119,7 @@ user-install:
 user-install-doc:
 user-install-bash-completion:
 user-install-docker-cli-plugin:
+user-install-linux-platforms:
 user-install-linux-amd64-domake:
 user-install-linux-arm64-domake:
 user-install-linux-arm-domake:

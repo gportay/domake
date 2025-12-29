@@ -1,3 +1,0 @@
-debian/tmp/usr/bin/linux-arm-domake usr/bin
-debian/tmp/usr/bin/linux-arm-v6-domake usr/bin
-debian/tmp/usr/bin/linux-arm-v7-domake usr/bin
