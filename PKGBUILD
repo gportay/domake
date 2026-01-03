@@ -20,6 +20,7 @@ checkdepends=(shellcheck)
 source=("domake-$pkgver.tar.gz::https://github.com/gportay/domake/archive/$pkgver.tar.gz")
 sha256sums=(SKIP)
 validpgpkeys=(8F3491E60E62695ED780AC672FA122CA0501CA71)
+changelog=CHANGELOG.md
 
 build() {
 	cd "domake-$pkgver"
