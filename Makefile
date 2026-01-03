@@ -222,9 +222,12 @@ rpm:
 sources: domake-$(VERSION).tar.gz rpmbuild/SOURCES/$(VERSION).tar.gz
 
 rpmbuild/SOURCES/$(VERSION).tar.gz:
-rpmbuild/SOURCES/%.tar.gz:
+rpmbuild/SOURCES/%.tar.gz: FORCE
 	git archive --prefix domake-$*/ --format tar.gz --output $@ HEAD
 
 domake-$(VERSION).tar.gz:
-%.tar.gz:
+%.tar.gz: FORCE
 	git archive --prefix $*/ --format tar.gz --output $@ HEAD
+
+.PHONY: FORCE
+FORCE:
