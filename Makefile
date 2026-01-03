@@ -192,10 +192,15 @@ clean:
 	rm -f debian/files debian/debhelper-build-stamp debian/*.substvars \
 	   -R debian/.debhelper/ debian/tmp/ \
 	      debian/domake/
-	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
+	rm -f src/*.tar.gz *.pkg.tar* \
 	   -R src/domake-*/ pkg/domake-*/ domake-git/
-	rm -f rpmbuild/SOURCES/*.tar.gz rpmbuild/SPECS/*.spec \
-	      rpmbuild/SRPMS/*.rpm rpmbuild/RPMS/*/*.rpm
+	rm -f rpmbuild/SPECS/*.spec rpmbuild/SRPMS/*.rpm \
+	      rpmbuild/RPMS/*/*.rpm
+
+.PHONY: maintainer-clean
+maintainer-clean: clean
+	rm -f *.tar.gz
+	rm -f rpmbuild/SOURCES/*.tar.gz
 
 %.1: %.1.adoc
 	asciidoctor -b manpage -o $@ $<
