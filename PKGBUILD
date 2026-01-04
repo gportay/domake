@@ -46,7 +46,7 @@ package_domake-docker-make() {
 	depends+=(domake)
 
 	cd "domake-$pkgver"
-	make DESTDIR="$pkgdir/" PREFIX="/usr" install-docker-cli-plugin
+	make DESTDIR="$pkgdir" PREFIX="/usr" install-docker-cli-plugin
 	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/domake-docker-make/LICENSE"
 }
 
