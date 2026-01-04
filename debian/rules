@@ -1,6 +1,4 @@
 #!/usr/bin/make -f
-DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
-
 override_dh_auto_test:
 	$(MAKE) check
 
@@ -8,7 +6,7 @@ override_dh_auto_build:
 	$(MAKE) domake.1.gz
 
 override_dh_auto_install:
-	$(MAKE) PREFIX=/usr DESTDIR=debian/tmp DOCKERLIBDIR=/usr/lib/$(DEB_HOST_MULTIARCH)/docker install-all install-linux-amd64-domake install-linux-arm64-domake install-linux-arm-domake install-linux-arm-v6-domake install-linux-arm-v7-domake install-linux-ppc64le-domake install-linux-riscv64-domake install-linux-s390x-domake
+	$(MAKE) PREFIX=/usr DESTDIR=debian/tmp install-all install-linux-amd64-domake install-linux-arm64-domake install-linux-arm-domake install-linux-arm-v6-domake install-linux-arm-v7-domake install-linux-ppc64le-domake install-linux-riscv64-domake install-linux-s390x-domake
 
 %:
 	PREFIX=/usr dh $@
