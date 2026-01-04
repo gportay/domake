@@ -1,3 +1,4 @@
 debian/tmp/usr/bin/domake usr/bin
+debian/tmp/usr/lib/docker/cli-plugins/docker-make usr/lib/docker/cli-plugins
 debian/tmp/usr/share/bash-completion/completions/domake usr/share/bash-completion/completions
 debian/tmp/usr/share/man/man1/domake.1.gz usr/share/man/man1

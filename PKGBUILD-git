@@ -1,8 +1,6 @@
 # Maintainer: Gaël PORTAY <gael.portay@gmail.com>
 
-pkgname=(domake-git
-	 domake-docker-make-git
-	 domake-linux-platforms-git)
+pkgname=(domake-git domake-linux-platforms-git)
 pkgver=master
 pkgrel=1
 pkgdesc='Docker make'
@@ -34,24 +32,12 @@ check() {
 
 package_domake-git() {
 	depends+=(dosh)
-	optdepends+=(domake-docker-make)
 	provides=(domake)
 	conflicts=(domake)
 
 	cd "$srcdir/domake-git"
-	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc install-bash-completion
+	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc install-bash-completion install-docker-cli-plugin
 	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/domake-git/LICENSE"
-}
-
-package_domake-docker-make-git() {
-	pkgdesc='Docker CLI plugin for domake'
-	depends+=(domake)
-	provides=(domake-docker-make)
-	conflicts=(domake-docker-make)
-
-	cd "$srcdir/domake-git"
-	make DESTDIR="$pkgdir" PREFIX="/usr" install-docker-cli-plugin
-	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/domake-docker-make-git/LICENSE"
 }
 
 package_domake-linux-platforms-git() {
