@@ -93,6 +93,17 @@ make check
 %make_install PREFIX=/usr DOCKERLIBDIR=%{_libdir}/docker install-all install-linux-amd64-domake install-linux-arm64-domake install-linux-arm-domake install-linux-arm-v6-domake install-linux-arm-v7-domake install-linux-ppc64le-domake install-linux-riscv64-domake install-linux-s390x-domake
 
 
+%post docker-make
+_libdir=$(rpm --eval '%%{_libdir}')
+mkdir -p "$_libdir/docker/cli-plugins"
+ln -sf ../../../../..%{_dockerlibdir}/cli-plugins/docker-bash "$_libdir/docker/cli-plugins/docker-make"
+
+
+%preun docker-make
+_libdir=$(rpm --eval '%%{_libdir}')
+rm -f "$_libdir/docker/cli-plugins/docker-make"
+
+
 %files
 %license LICENSE
 %doc README.md
@@ -128,7 +139,7 @@ make check
 
 
 %files docker-make
-%{_libdir}/docker/cli-plugins/docker-make
+%{_dockerlibdir}/cli-plugins/docker-make
 
 %changelog
 * Fri Aug 01 2025 Gaël PORTAY <gael.portay@gmail.com> - 3-1

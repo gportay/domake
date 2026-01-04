@@ -215,7 +215,7 @@ rpm: SHELL=dosh
 rpm: export DOSH_DOCKERFILE=Dockerfile.rpm
 rpm:
 	cd ~/rpmbuild/SPECS
-	rpmbuild --undefine=_disable_source_fetch -ba domake.spec
+	rpmbuild --undefine=_disable_source_fetch --define='_dockerlibdir %{_exec_prefix}/lib/docker' -ba domake.spec
 	rpmlint ~/rpmbuild/SPECS/domake.spec ~/rpmbuild/SRPMS/domake*.rpm ~/rpmbuild/RPMS/domake*.rpm
 
 .PHONY: sources
