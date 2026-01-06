@@ -8,6 +8,36 @@ Files:
 Copyright: Copyright 2017-2020,2023-2026 Gaël PORTAY <gael.portay@gmail.com>
 License: LGPL-2.1
 
+Files:
+ Makefile
+ tests.bash
+Copyright: Copyright 2017-2020,2023-2025 Gaël PORTAY
+License: LGPL-2.1
+
+Files:
+ README.md
+ domake
+Copyright: Copyright 2017-2018,2020,2023-2025 Gaël PORTAY
+License: LGPL-2.1
+
+Files: bash-completion
+Copyright: Copyright 2017-2018,2023,2025 Gaël PORTAY
+License: LGPL-2.1
+
+Files: domake.1.adoc
+Copyright: Copyright 2017-2018,2020,2024-2025 Gaël PORTAY
+License: LGPL-2.1
+
+Files:
+ support/armv6-domake
+ support/armv7-domake
+Copyright: Copyright 2025 Gaël PORTAY
+License: LGPL-2.1
+
+Files: support/docker-make
+Copyright: Copyright 2023-2025 Gaël PORTAY
+License: LGPL-2.1
+
 License: LGPL-2.1
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
