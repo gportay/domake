@@ -7,7 +7,7 @@ Build-Depends: debhelper-compat (= 13)
 
 Package: domake
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, dosh
 Description: Maintain program dependencies running commands in container.
  domake(1) runs on top of make(1) using dosh(1) as default shell.
 
