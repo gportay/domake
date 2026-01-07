@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2023-2025 Gaël PORTAY
+# Copyright 2023-2026 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
@@ -54,8 +54,6 @@ Options:
   --platform string        Set target platform.
   -C, --directory string   Change to directory before doing anything else.
   --shell string           Set shell interpretor.
-  --version                Print version.
-  --help                   Print usage.
   --version                Print version.
   --help                   Print usage.
 EOF
