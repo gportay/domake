@@ -77,14 +77,6 @@ Summary:  Docker make for linux/s390x platform
 domake(1) runs on top of make(1) using dosh(1) as default shell.
 
 
-%package  docker-make
-Requires: docker
-Summary:  Docker CLI plugin for domake
-
-%description docker-make
-Docker CLI plugin for domake.
-
-
 %prep
 %setup -q
 
@@ -101,13 +93,13 @@ make check
 %make_install PREFIX=/usr DOCKERLIBDIR=%{_libdir}/docker install-all install-linux-amd64-domake install-linux-arm64-domake install-linux-arm-domake install-linux-arm-v6-domake install-linux-arm-v7-domake install-linux-ppc64le-domake install-linux-riscv64-domake install-linux-s390x-domake
 
 
-%post docker-make
+%post
 _libdir=$(rpm --eval '%%{_libdir}')
 mkdir -p "$_libdir/docker/cli-plugins"
 ln -sf ../../../../..%{_dockerlibdir}/cli-plugins/docker-bash "$_libdir/docker/cli-plugins/docker-make"
 
 
-%preun docker-make
+%preun
 _libdir=$(rpm --eval '%%{_libdir}')
 rm -f "$_libdir/docker/cli-plugins/docker-make"
 
@@ -118,6 +110,7 @@ rm -f "$_libdir/docker/cli-plugins/docker-make"
 %{_bindir}/domake
 %{_datadir}/bash-completion/completions/domake
 %{_datadir}/man/man1/domake.1.gz
+%{_dockerlibdir}/cli-plugins/docker-make
 
 
 %files linux-platforms
@@ -129,10 +122,6 @@ rm -f "$_libdir/docker/cli-plugins/docker-make"
 %{_bindir}/linux-ppc64le-domake
 %{_bindir}/linux-riscv64-domake
 %{_bindir}/linux-s390x-domake
-
-
-%files docker-make
-%{_dockerlibdir}/cli-plugins/docker-make
 
 %changelog
 * Fri Aug 01 2025 Gaël PORTAY <gael.portay@gmail.com> - 3-1
