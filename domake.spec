@@ -67,10 +67,10 @@ rm -f "$_libdir/docker/cli-plugins/docker-make"
 
 %files linux-platforms
 %{_bindir}/linux-amd64-domake
-%{_bindir}/linux-arm64-domake
 %{_bindir}/linux-arm-domake
 %{_bindir}/linux-arm-v6-domake
 %{_bindir}/linux-arm-v7-domake
+%{_bindir}/linux-arm64-domake
 %{_bindir}/linux-ppc64le-domake
 %{_bindir}/linux-riscv64-domake
 %{_bindir}/linux-s390x-domake
