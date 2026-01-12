@@ -12,23 +12,3 @@ Replaces: domake-docker-make (<< 4)
 Breaks: domake-docker-make (<< 4)
 Description: Maintain program dependencies running commands in container.
  domake(1) runs on top of make(1) using dosh(1) as default shell.
-
-Package: domake-linux-platforms
-Architecture: all
-Depends: ${misc:Depends}, domake
-Replaces:
- domake-linux-amd64 (<< 4),
- domake-linux-arm64 (<< 4),
- domake-linux-arm (<< 4),
- domake-linux-ppc64le (<< 4),
- domake-linux-riscv64 (<< 4),
- domake-linux-s390x (<< 4),
-Breaks:
- domake-linux-amd64 (<< 4),
- domake-linux-arm64 (<< 4),
- domake-linux-arm (<< 4),
- domake-linux-ppc64le (<< 4),
- domake-linux-riscv64 (<< 4),
- domake-linux-s390x (<< 4),
-Description: Docker make for linux platforms.
- domake(1) runs on top of make(1) using dosh(1) as default shell.

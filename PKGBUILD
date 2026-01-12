@@ -1,6 +1,6 @@
 # Maintainer: Gaël PORTAY <gael.portay@gmail.com>
 
-pkgname=(domake domake-linux-platforms)
+pkgname=(domake)
 pkgver=3
 pkgrel=1
 pkgdesc='Docker make'
@@ -29,15 +29,6 @@ package_domake() {
 	depends+=(dosh)
 
 	cd "domake-$pkgver"
-	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc install-bash-completion install-docker-cli-plugin
+	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc install-bash-completion install-docker-cli-plugin install-linux-platforms
 	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/domake/LICENSE"
-}
-
-package_domake-linux-platforms() {
-	pkgdesc='Docker shell for linux platforms'
-	depends+=(domake)
-
-	cd "domake-$pkgver"
-	make DESTDIR="$pkgdir" PREFIX="/usr" install-linux-platforms
-	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/domake-linux-platforms/LICENSE"
 }

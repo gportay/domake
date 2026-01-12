@@ -2,7 +2,5 @@
 debhelper-build-stamp
 domake.substvars
 domake/
-domake-linux-platforms.substvars
-domake-linux-platforms/
 files
 tmp/

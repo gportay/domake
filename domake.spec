@@ -21,13 +21,6 @@ domake(1) runs on top of make(1) using dosh(1) as default shell.
 
 %global debug_package %{nil}
 
-%package  linux-platforms
-Requires: dosh
-Summary:  Docker make for linux platforms
-
-%description linux-platforms
-domake(1) runs on top of make(1) using dosh(1) as default shell.
-
 
 %prep
 %setup -q
@@ -42,7 +35,7 @@ make check
 
 
 %install
-%make_install PREFIX=/usr DOCKERLIBDIR=%{_libdir}/docker install-all install-linux-amd64-domake install-linux-arm64-domake install-linux-arm-domake install-linux-arm-v6-domake install-linux-arm-v7-domake install-linux-ppc64le-domake install-linux-riscv64-domake install-linux-s390x-domake
+%make_install PREFIX=/usr DOCKERLIBDIR=%{_libdir}/docker install-all install-linux-platforms
 
 
 %post
@@ -63,17 +56,14 @@ rm -f "$_libdir/docker/cli-plugins/docker-make"
 %{_datadir}/bash-completion/completions/domake
 %{_datadir}/man/man1/domake.1.gz
 %{_dockerlibdir}/cli-plugins/docker-make
-
-
-%files linux-platforms
-%{_bindir}/linux-amd64-domake
-%{_bindir}/linux-arm-domake
-%{_bindir}/linux-arm-v6-domake
-%{_bindir}/linux-arm-v7-domake
-%{_bindir}/linux-arm64-domake
-%{_bindir}/linux-ppc64le-domake
-%{_bindir}/linux-riscv64-domake
-%{_bindir}/linux-s390x-domake
+%{_exec_prefix}/lib/domake/bin/linux-amd64-domake
+%{_exec_prefix}/lib/domake/bin/linux-arm-domake
+%{_exec_prefix}/lib/domake/bin/linux-arm-v6-domake
+%{_exec_prefix}/lib/domake/bin/linux-arm-v7-domake
+%{_exec_prefix}/lib/domake/bin/linux-arm64-domake
+%{_exec_prefix}/lib/domake/bin/linux-ppc64le-domake
+%{_exec_prefix}/lib/domake/bin/linux-riscv64-domake
+%{_exec_prefix}/lib/domake/bin/linux-s390x-domake
 
 %changelog
 * Fri Aug 01 2025 Gaël PORTAY <gael.portay@gmail.com> - 3-1

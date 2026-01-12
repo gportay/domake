@@ -73,8 +73,8 @@ install-linux-ppc64le-domake:
 install-linux-riscv64-domake:
 install-linux-s390x-domake:
 install-linux-%-domake:
-	install -d $(DESTDIR)$(PREFIX)/bin
-	ln -sf domake $(DESTDIR)$(PREFIX)/bin/linux-$*-domake
+	install -d $(DESTDIR)$(PREFIX)/lib/domake/bin
+	ln -sf ../../../bin/domake $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-$*-domake
 
 
 .PHONY: uninstall
@@ -89,14 +89,14 @@ uninstall:
 	if [ -n "$$completionsdir" ]; then \
 		rm -f $(DESTDIR)$$completionsdir/domake; \
 	fi
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-amd64-domake
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm64-domake
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm-domake
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm-v6-domake
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-arm-v7-domake
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-ppc64le-domake
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-riscv64-domake
-	rm -f $(DESTDIR)$(PREFIX)/bin/linux-s390x-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-amd64-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-arm64-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-arm-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-arm-v6-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-arm-v7-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-ppc64le-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-riscv64-domake
+	rm -f $(DESTDIR)$(PREFIX)/lib/domake/bin/linux-s390x-domake
 
 .PHONY: user-install-world
 user-install-world: user-install-all
@@ -191,7 +191,7 @@ clean:
 	rm -f domake.1.gz
 	rm -f debian/files debian/debhelper-build-stamp debian/*.substvars \
 	   -R debian/.debhelper/ debian/tmp/ \
-	      debian/domake/ debian/domake-linux-platforms/
+	      debian/domake/
 	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/domake-*/ pkg/domake-*/ domake-git/
 	rm -f rpmbuild/SOURCES/*.tar.gz rpmbuild/SPECS/*.spec \

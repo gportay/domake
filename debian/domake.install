@@ -1,4 +1,12 @@
 debian/tmp/usr/bin/domake usr/bin
+debian/tmp/usr/lib/domake/bin/linux-amd64-domake usr/lib/domake/bin
+debian/tmp/usr/lib/domake/bin/linux-arm-domake usr/lib/domake/bin
+debian/tmp/usr/lib/domake/bin/linux-arm-v6-domake usr/lib/domake/bin
+debian/tmp/usr/lib/domake/bin/linux-arm-v7-domake usr/lib/domake/bin
+debian/tmp/usr/lib/domake/bin/linux-arm64-domake usr/lib/domake/bin
+debian/tmp/usr/lib/domake/bin/linux-ppc64le-domake usr/lib/domake/bin
+debian/tmp/usr/lib/domake/bin/linux-riscv64-domake usr/lib/domake/bin
+debian/tmp/usr/lib/domake/bin/linux-s390x-domake usr/lib/domake/bin
 debian/tmp/usr/lib/docker/cli-plugins/docker-make usr/lib/docker/cli-plugins
 debian/tmp/usr/share/bash-completion/completions/domake usr/share/bash-completion/completions
 debian/tmp/usr/share/man/man1/domake.1.gz usr/share/man/man1

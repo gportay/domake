@@ -1,8 +1,0 @@
-debian/tmp/usr/bin/linux-amd64-domake usr/bin
-debian/tmp/usr/bin/linux-arm-domake usr/bin
-debian/tmp/usr/bin/linux-arm-v6-domake usr/bin
-debian/tmp/usr/bin/linux-arm-v7-domake usr/bin
-debian/tmp/usr/bin/linux-arm64-domake usr/bin
-debian/tmp/usr/bin/linux-ppc64le-domake usr/bin
-debian/tmp/usr/bin/linux-riscv64-domake usr/bin
-debian/tmp/usr/bin/linux-s390x-domake usr/bin
