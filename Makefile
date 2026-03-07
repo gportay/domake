@@ -35,6 +35,7 @@ install-all: install-docker-cli-plugin
 install:
 	install -D -m 755 domake $(DESTDIR)$(PREFIX)/bin/domake
 	install -D -m 644 docker/deb/Dockerfile $(DESTDIR)$(PREFIX)/share/domake/docker/deb/Dockerfile
+	install -D -m 644 docker/pkg/Dockerfile $(DESTDIR)$(PREFIX)/share/domake/docker/pkg/Dockerfile
 	install -D -m 644 docker/rpm/Dockerfile $(DESTDIR)$(PREFIX)/share/domake/docker/rpm/Dockerfile
 
 .PHONY: install-man
@@ -84,6 +85,7 @@ uninstall: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/domake
 	rm -f $(DESTDIR)$(PREFIX)/share/domake/docker/deb/Dockerfile
+	rm -f $(DESTDIR)$(PREFIX)/share/domake/docker/pkg/Dockerfile
 	rm -f $(DESTDIR)$(PREFIX)/share/domake/docker/rpm/Dockerfile
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
 	rm -f $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
@@ -223,7 +225,7 @@ deb:
 .PHONY: pkg
 pkg: PATH:=$(CURDIR):$(PATH)
 pkg: SHELL=dosh
-pkg: export DOSH_DOCKERFILE=Dockerfile.pkg
+pkg: export DOSH_DOCKERFILE=docker/pkg/Dockerfile
 pkg:
 	makepkg --force --skipchecksums
 	shellcheck --shell=bash --exclude=SC2034,SC2154,SC2164 PKGBUILD*
