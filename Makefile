@@ -34,6 +34,7 @@ install-all: install-docker-cli-plugin
 .PHONY: install
 install:
 	install -D -m 755 domake $(DESTDIR)$(PREFIX)/bin/domake
+	install -D -m 644 docker/rpm/Dockerfile $(DESTDIR)$(PREFIX)/share/domake/docker/rpm/Dockerfile
 
 .PHONY: install-man
 install-man:
@@ -81,6 +82,7 @@ install-linux-%-domake:
 uninstall: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/domake
+	rm -f $(DESTDIR)$(PREFIX)/share/domake/docker/rpm/Dockerfile
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
 	rm -f $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
 	completionsdir=$${BASHCOMPLETIONSDIR:-$$(pkg-config --define-variable=prefix=$(PREFIX) \
@@ -228,7 +230,7 @@ pkg:
 .PHONY: rpm
 rpm: PATH:=$(CURDIR):$(PATH)
 rpm: SHELL=dosh
-rpm: export DOSH_DOCKERFILE=Dockerfile.rpm
+rpm: export DOSH_DOCKERFILE=docker/rpm/Dockerfile
 rpm:
 	cd ~/rpmbuild/SPECS
 	rpmbuild --undefine=_disable_source_fetch --define='_dockerlibdir %{_exec_prefix}/lib/docker' -ba domake.spec

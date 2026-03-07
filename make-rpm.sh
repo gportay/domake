@@ -1,4 +1,4 @@
-#!/usr/bin/env -S DOSH_DOCKERFILE=Dockerfile.rpm DOSH_DOCKER_RUN_EXTRA_OPTS="--volume ${PWD}/rpmbuild:${HOME}/rpmbuild --volume ${PWD}/domake.spec:${HOME}/rpmbuild/SPECS/domake.spec" dosh --no-doshrc
+#!/usr/bin/env -S DOSH_DOCKERFILE=docker/rpm/Dockerfile DOSH_DOCKER_RUN_EXTRA_OPTS="--volume ${PWD}/rpmbuild:${HOME}/rpmbuild --volume ${PWD}/domake.spec:${HOME}/rpmbuild/SPECS/domake.spec" dosh --no-doshrc
 set -e
 rpmdev-setuptree
 cd ~/rpmbuild/SPECS
