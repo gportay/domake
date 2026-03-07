@@ -54,6 +54,7 @@ rm -f "$_libdir/docker/cli-plugins/docker-make"
 %doc README.md
 %{_bindir}/domake
 %{_datadir}/bash-completion/completions/domake
+%{_datadir}/domake/docker/deb/Dockerfile
 %{_datadir}/domake/docker/rpm/Dockerfile
 %{_datadir}/man/man1/domake.1.gz
 %{_dockerlibdir}/cli-plugins/docker-make

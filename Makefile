@@ -34,6 +34,7 @@ install-all: install-docker-cli-plugin
 .PHONY: install
 install:
 	install -D -m 755 domake $(DESTDIR)$(PREFIX)/bin/domake
+	install -D -m 644 docker/deb/Dockerfile $(DESTDIR)$(PREFIX)/share/domake/docker/deb/Dockerfile
 	install -D -m 644 docker/rpm/Dockerfile $(DESTDIR)$(PREFIX)/share/domake/docker/rpm/Dockerfile
 
 .PHONY: install-man
@@ -82,6 +83,7 @@ install-linux-%-domake:
 uninstall: DOCKERLIBDIR ?= $(PREFIX)/lib/docker
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/domake
+	rm -f $(DESTDIR)$(PREFIX)/share/domake/docker/deb/Dockerfile
 	rm -f $(DESTDIR)$(PREFIX)/share/domake/docker/rpm/Dockerfile
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
 	rm -f $(DESTDIR)$(DOCKERLIBDIR)/cli-plugins/docker-make
@@ -213,7 +215,7 @@ maintainer-clean: clean
 .PHONY: deb
 deb: PATH:=$(CURDIR):$(PATH)
 deb: SHELL=dosh
-deb: export DOSH_DOCKERFILE=Dockerfile.deb
+deb: export DOSH_DOCKERFILE=docker/deb/Dockerfile
 deb:
 	dpkg-buildpackage -us -uc
 	lintian ../domake*.dsc ../domake*.deb
