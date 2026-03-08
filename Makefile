@@ -1,5 +1,5 @@
 #
-# Copyright 2017-2020,2023-2025 Gaël PORTAY
+# Copyright 2017-2020,2023-2026 Gaël PORTAY
 #
 # SPDX-License-Identifier: LGPL-2.1-or-later
 #
@@ -11,8 +11,8 @@ VERSION ?= $(shell bash domake --version)
 all:
 	@eval $$(cat /etc/os*release); echo $$NAME; uname -m
 
-.PHONY: doc
-doc: domake.1.gz
+.PHONY: man
+man: domake.1.gz
 
 .PHONY: install-world
 install-world: install-all
@@ -27,7 +27,7 @@ install-world: install-linux-s390x-domake
 
 .PHONY: install-all
 install-all: install
-install-all: install-doc
+install-all: install-man
 install-all: install-bash-completion
 install-all: install-docker-cli-plugin
 
@@ -35,8 +35,8 @@ install-all: install-docker-cli-plugin
 install:
 	install -D -m 755 domake $(DESTDIR)$(PREFIX)/bin/domake
 
-.PHONY: install-doc
-install-doc:
+.PHONY: install-man
+install-man:
 	install -D -m 644 domake.1.gz $(DESTDIR)$(PREFIX)/share/man/man1/domake.1.gz
 
 .PHONY: install-bash-completion
@@ -111,12 +111,12 @@ user-install-world: user-install-linux-s390x-domake
 
 .PHONY: user-install-all
 user-install-all: user-install
-user-install-all: user-install-doc
+user-install-all: user-install-man
 user-install-all: user-install-bash-completion
 user-install-all: user-install-docker-cli-plugin
 
 user-install:
-user-install-doc:
+user-install-man:
 user-install-bash-completion:
 user-install-docker-cli-plugin:
 user-install-linux-platforms:

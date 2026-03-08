@@ -29,6 +29,6 @@ package_domake() {
 	depends+=(dosh)
 
 	cd "domake-$pkgver"
-	make DESTDIR="$pkgdir" PREFIX="/usr" install install-doc install-bash-completion install-docker-cli-plugin install-linux-platforms
+	make DESTDIR="$pkgdir" PREFIX="/usr" install install-man install-bash-completion install-docker-cli-plugin install-linux-platforms
 	install -D -m 644 LICENSE "$pkgdir/usr/share/licenses/domake/LICENSE"
 }

@@ -34,7 +34,7 @@ container
 
 Build the documentation using *domake(1)* and _Makefile_
 
-	$ domake doc
+	$ domake man
 	sha256:ced062433e33
 	asciidoctor -b manpage -o domake.1 domake.1.adoc
 	gzip -c domake.1 >domake.1.gz
@@ -81,7 +81,7 @@ Written by Gaël PORTAY *gael.portay@gmail.com*
 
 ## COPYRIGHT
 
-Copyright 2017-2018,2020,2023-2025 Gaël PORTAY
+Copyright 2017-2018,2020,2023-2026 Gaël PORTAY
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free

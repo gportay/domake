@@ -8,10 +8,8 @@ Files:
 Copyright: Copyright 2017-2020,2023-2026 Gaël PORTAY <gael.portay@gmail.com>
 License: LGPL-2.1
 
-Files:
- Makefile
- tests.bash
-Copyright: Copyright 2017-2020,2023-2025 Gaël PORTAY
+Files: Makefile
+Copyright: Copyright 2017-2020,2023-2026 Gaël PORTAY
 License: LGPL-2.1
 
 Files:
@@ -36,6 +34,10 @@ License: LGPL-2.1
 
 Files: support/docker-make
 Copyright: Copyright 2023-2026 Gaël PORTAY
+License: LGPL-2.1
+
+Files: tests.bash
+Copyright: Copyright 2017-2020,2023-2025 Gaël PORTAY
 License: LGPL-2.1
 
 License: LGPL-2.1
